@@ -11,6 +11,8 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Account;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.BankException;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.ChangeAccountCmd;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.EndTransactionCmd;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.LoginCmd;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.MyAccountsCmd;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.NetCommand;
@@ -23,7 +25,7 @@ public class BankServer {
 	private Socket connection = null;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
-	private String message;
+	private String message = "";
 	private NetCommand command;
 	
 	private Bank activeBank = BankCommander.bank;
@@ -50,12 +52,9 @@ public class BankServer {
 					command = (NetCommand) in.readObject();
 					sendMessage(handleRequest(command));
 					
-					
 					if(message.equals("bye")) {
 						sendMessage("bye");
 					}
-					
-					
 					
 				} catch (ClassNotFoundException e) {
 					System.err.println("Data recived in unknown format");
@@ -95,15 +94,28 @@ public class BankServer {
 			
 		}
 		else if(command.getClass() == WithdrawCmd.class) {
-			try {
-				loggedClient.withdraw(((WithdrawCmd)command).getAmount());
-			} catch (BankException e) {
-				return e.getMessage();
+			if(loggedClient.getActiveAccount() != null) {
+				try {
+					loggedClient.withdraw(((WithdrawCmd)command).getAmount());
+				} catch (BankException e) {
+					return e.getMessage();
+				}
+				return "Withdrawn: " + ((WithdrawCmd)command).getAmount();
 			}
-			return "Withdrawn: " + ((WithdrawCmd)command).getAmount();
+			else 
+				return "No account set as active";
+		}
+		else if(command.getClass() == ChangeAccountCmd.class) {
+			Account activeAccount = loggedClient.searchAccount(((ChangeAccountCmd)command).getAccountID());
+			loggedClient.setActiveAccount(activeAccount);
+			return "Acitve account is: " + activeAccount;
+		}
+		else if(command.getClass() == EndTransactionCmd.class) {
+			message = "bye";
+			return message;
 		}
 		
-		return null;
+		return "Incorrect command";
 	}
 
 	private void sendMessage(final String msg) {
