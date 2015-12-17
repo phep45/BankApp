@@ -60,6 +60,7 @@ public class BankServer {
 					
 					if(message.equals("bye")) {
 						sendMessage("bye");
+						return;
 					}
 					
 				} catch (ClassNotFoundException e) {
@@ -81,6 +82,7 @@ public class BankServer {
 	}
 	
 	private String handleRequest(NetCommand command) {
+		//Login command
 		if(command.getClass() == LoginCmd.class) {
 			System.out.println("++++++++");
 			System.out.println(activeBank.getClient(((LoginCmd) command).getLogin()));
@@ -93,6 +95,7 @@ public class BankServer {
 				return "Username incorrect";
 			}
 		}
+		//My accounts command
 		else if(command.getClass() == MyAccountsCmd.class) {
 			StringBuilder response = new StringBuilder();
 			List<Account> accounts = loggedClient.getAccountsList();
@@ -102,6 +105,7 @@ public class BankServer {
 			return response.toString();
 			
 		}
+		//Withdrawn command
 		else if(command.getClass() == WithdrawCmd.class) {
 			if(loggedClient.getActiveAccount() != null) {
 				try {
@@ -114,11 +118,13 @@ public class BankServer {
 			else 
 				return "No account set as active";
 		}
+		//Change account command
 		else if(command.getClass() == ChangeAccountCmd.class) {
 			Account activeAccount = loggedClient.searchAccount(((ChangeAccountCmd)command).getAccountID());
 			loggedClient.setActiveAccount(activeAccount);
 			return "Acitve account is: " + activeAccount;
 		}
+		//End transaction command
 		else if(command.getClass() == EndTransactionCmd.class) {
 			message = "bye";
 			return message;

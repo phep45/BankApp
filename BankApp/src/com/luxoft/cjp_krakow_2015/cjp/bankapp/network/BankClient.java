@@ -64,7 +64,7 @@ public class BankClient {
 		try {
 			out.writeObject(command);
 			out.flush();
-			System.out.print("client>> ");
+//			System.out.print("client>> ");
 			command.printInfo();
 		} catch(IOException e) {
 			e.printStackTrace();
