@@ -131,6 +131,7 @@ public class BankApplication {
 		}
 		else if(args[0].equals("-server")) {
 			bankApp.initialize();
+			bankApp.modify();
 //			bankApp.printBankReport();
 			BankServer server = new BankServer(bankApp.bank);
 			server.run();

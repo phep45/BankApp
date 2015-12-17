@@ -17,7 +17,6 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.LoginCmd;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.MyAccountsCmd;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.NetCommand;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.WithdrawCmd;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankCommander;
 
 public class BankServer {
 

@@ -2,12 +2,14 @@ package com.luxoft.cjp_krakow_2015.cjp.bankapp.tests;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.junit.After;
 import org.junit.Test;
 
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
@@ -18,6 +20,12 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.InvalidClientNam
 public class SerializationTest {
 
 	private final String filename = "TEST_CLIENT";
+	
+	@After
+	public void tearDown() {
+		File file = new File(filename+".dat");
+		file.delete();
+	}
 	
 	@Test
 	public void testSerialization() throws IOException, ClassNotFoundException, InvalidClientNameException, EmailException {
@@ -34,6 +42,7 @@ public class SerializationTest {
 		ois.close();
 		
 		assertEquals(client, deserializedCient);
+		
 	}
 
 }

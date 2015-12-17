@@ -105,6 +105,9 @@ public class BankClient {
 				System.out.println("Transaction ended");
 				return new EndTransactionCmd();
 			}
+			else {
+				action();
+			}
 		}
 		
 		return null;
