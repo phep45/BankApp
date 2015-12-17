@@ -28,7 +28,7 @@ public class BankServer {
 	private String message = "";
 	private NetCommand command;
 	
-	private Bank activeBank = BankCommander.bank;
+	private Bank activeBank;//= BankCommander.bank;
 	private Client loggedClient;
 	
 	public BankServer(Bank bank) {
@@ -36,6 +36,12 @@ public class BankServer {
 	}
 	
 	public void run() {
+		
+		activeBank.printReport();
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
 		try {
 			providerSocket = new ServerSocket(2004, 10);
 			System.out.println("Waiting for connection");
@@ -50,6 +56,7 @@ public class BankServer {
 				try {
 					
 					command = (NetCommand) in.readObject();
+					command.printInfo();
 					sendMessage(handleRequest(command));
 					
 					if(message.equals("bye")) {
@@ -76,6 +83,9 @@ public class BankServer {
 	
 	private String handleRequest(NetCommand command) {
 		if(command.getClass() == LoginCmd.class) {
+			System.out.println("++++++++");
+			System.out.println(activeBank.getClient(((LoginCmd) command).getLogin()));
+			System.out.println("++++++++");
 			if(activeBank.getClient(((LoginCmd) command).getLogin()) != null) {
 				loggedClient = activeBank.getClient(((LoginCmd) command).getLogin());
 				return "Logged in";

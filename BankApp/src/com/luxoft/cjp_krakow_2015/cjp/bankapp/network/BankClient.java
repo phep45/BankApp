@@ -38,7 +38,7 @@ public class BankClient {
 					message = (String) in.readObject();
 					System.out.println("server>> " + message);
 					
-					sendCommnd(action());
+					sendCommand(action());
 					
 				} catch(ClassNotFoundException e) {
 					e.printStackTrace();
@@ -60,7 +60,7 @@ public class BankClient {
 		}
 	}
 
-	private void sendCommnd(NetCommand command) {
+	private void sendCommand(NetCommand command) {
 		try {
 			out.writeObject(command);
 			out.flush();
@@ -77,7 +77,7 @@ public class BankClient {
 			System.out.println("Username: ");
 			try {
 				user = reader.readLine();
-				return new LoginCmd("user");
+				return new LoginCmd(user);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
