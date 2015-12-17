@@ -14,6 +14,7 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Gender;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.SavingAccount;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.BankException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.ClientExistsException;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankClient;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer;
 
 public class BankApplication {
@@ -30,8 +31,8 @@ public class BankApplication {
 	public void initialize() {
 		try{
 			bankService.addClient(bank, new Client("Adam Adamski", Gender.MALE, "adam@mail.pl", "Krakow", 100f));
-			bankService.addClient(bank, new Client("Ala Ma-Kota", Gender.FEMALE, "ala@kot.com", "Katowice"));
-			bankService.addClient(bank, new Client("Ola Olinska", Gender.FEMALE, "ola@mail.pl", "Katowice", 200));
+			bankService.addClient(bank, new Client("Ala MaKota", Gender.FEMALE, "ala@kot.com", "Katowice", 500f));
+			bankService.addClient(bank, new Client("Ola Olinska", Gender.FEMALE, "ola@mail.pl", "Katowice", 200f));
 		}catch(ClientExistsException e) {
 			System.err.println(e.getMessage());
 		} catch (Exception e) {
@@ -128,9 +129,15 @@ public class BankApplication {
 			System.out.println("===========================");
 			bankApp.printBankReport();
 		}
-		else if(args[0].equals("-online")) {
+		else if(args[0].equals("-server")) {
+			bankApp.initialize();
+			bankApp.printBankReport();
 			BankServer server = new BankServer(bankApp.bank);
 			server.run();
+		}
+		else if(args[0].equals("-client")) {
+			BankClient bankClient = new BankClient();
+			bankClient.run();
 		}
 	}
 
