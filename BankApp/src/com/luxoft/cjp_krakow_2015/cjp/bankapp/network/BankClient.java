@@ -103,6 +103,7 @@ public class BankClient {
 			}
 			else if(option.equals("4")) {
 				System.out.println("Transaction ended");
+				message = "bye";
 				return new EndTransactionCmd();
 			}
 			else {
