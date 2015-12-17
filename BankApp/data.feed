@@ -1,0 +1,5 @@
+accounttype=c;balance=100;overdraft=50;name=John Doe;city=Dallas;email=johndoe@mail.com;gender=m;
+accounttype=c;balance=150;overdraft=150;name=Ala Kot;city=Krakow;email=ala@ma.kota;gender=f;
+accounttype=s;balance=1250;overdraft=150;name=Ala Kot;city=Krakow;email=ala@ma.kota;gender=f;
+accounttype=s;balance=2500;overdraft=0;name=John Doe;city=Dallas;email=johndoe@mail.com;gender=m;
+accounttype=c;balance=100;overdraft=50;name=Jan Kowalski;email=jankowalski@mail.pl;gender=m;city=Katowice;
