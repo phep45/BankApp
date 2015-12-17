@@ -14,6 +14,7 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Gender;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.SavingAccount;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.BankException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.ClientExistsException;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer;
 
 public class BankApplication {
 
@@ -126,6 +127,10 @@ public class BankApplication {
 //			bankApp.printBalance();
 			System.out.println("===========================");
 			bankApp.printBankReport();
+		}
+		else if(args[0].equals("-online")) {
+			BankServer server = new BankServer(bankApp.bank);
+			server.run();
 		}
 	}
 

@@ -8,6 +8,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.ChangeAccountCmd;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.EndTransactionCmd;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.LoginCmd;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.MyAccountsCmd;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.NetCommand;
@@ -35,10 +37,9 @@ public class BankClient {
 				try {
 					message = (String) in.readObject();
 					System.out.println("server>> " + message);
+					
 					sendCommnd(action());
-//					sendMessage("");
-//					message = "bye";
-//					sendMessage("bye");
+					
 				} catch(ClassNotFoundException e) {
 					e.printStackTrace();
 				}
@@ -85,23 +86,31 @@ public class BankClient {
 			System.out.println("1) My Accounts");
 			System.out.println("2) Change active accout");
 			System.out.println("3) Withdraw");
+			System.out.println("4) End transaction");
 			String option = reader.readLine();
 			if(option.equals("1")) {
 				return new MyAccountsCmd();
 			}
 			else if(option.equals("2")) {
-				
+				System.out.println("Select account by ID:");
+				String id = reader.readLine();
+				return new ChangeAccountCmd(Integer.parseInt(id));
 			}
 			else if(option.equals("3")) {
 				System.out.println("Amount:");
 				float amount = (float) Double.parseDouble(reader.readLine());
 				return new WithdrawCmd(amount);
 			}
+			else if(option.equals("4")) {
+				System.out.println("Transaction ended");
+				return new EndTransactionCmd();
+			}
 		}
 		
 		return null;
 	}
 
+	/*
 	private void sendMessage(String msg) {
 		try {
 			out.writeObject(msg);
@@ -111,6 +120,7 @@ public class BankClient {
 			e.printStackTrace();
 		}
 	}
+	*/
 	
 	public void setMessage(String message) {
 		this.message = message;

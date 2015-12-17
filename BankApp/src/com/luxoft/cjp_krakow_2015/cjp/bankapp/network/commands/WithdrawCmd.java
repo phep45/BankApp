@@ -10,6 +10,10 @@ public class WithdrawCmd implements NetCommand {
 		this.amount = amount;
 	}
 	
+	public float getAmount() {
+		return amount;
+	}
+	
 	@Override
 	public void printInfo() {
 		System.out.println("Withdraw");
