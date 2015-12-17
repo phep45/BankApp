@@ -100,7 +100,7 @@ public class BankServer {
 			StringBuilder response = new StringBuilder();
 			List<Account> accounts = loggedClient.getAccountsList();
 			for(Account account : accounts) {
-				response.append(account.toString()).append("\\n");
+				response.append(account.toString()).append("\n");
 			}
 			return response.toString();
 			
