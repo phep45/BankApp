@@ -60,7 +60,6 @@ public class BankServer {
 					
 					if(message.equals("bye")) {
 						sendMessage("bye");
-						return;
 					}
 					
 				} catch (ClassNotFoundException e) {
