@@ -25,7 +25,7 @@ public class ServerThread extends BankServer implements Runnable {
 	
 	@Override
 	public void run() {
-		BankServerThreaded.incrementCounter();
+//		BankServerThreaded.incrementCounter();
 		
 		activeBank.printReport();
 		
@@ -49,14 +49,14 @@ public class ServerThread extends BankServer implements Runnable {
 			} while(!(request instanceof EndTransactionRequest));
 
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		} finally {
 			try {
 				in.close();
 				out.close();
 //				providerSocket.close();
 			} catch(IOException e) {
-				e.printStackTrace();
+//				e.printStackTrace();
 			} finally {
 				BankServerThreaded.decrementCounter();
 			}
