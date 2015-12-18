@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Account;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
@@ -28,6 +30,8 @@ public class BankServer {
 	
 	protected Bank activeBank;//= BankCommander.bank;
 	protected Client loggedClient;
+	
+	private Lock lock = new ReentrantLock();
 	
 	public BankServer() {
 		
@@ -107,7 +111,9 @@ public class BankServer {
 		else if(request.getClass() == WithdrawRequest.class) {
 			if(loggedClient.getActiveAccount() != null) {
 				try {
+					lock.lock();
 					loggedClient.withdraw(((WithdrawRequest)request).getAmount());
+					lock.unlock();
 				} catch (BankException e) {
 					return e.getMessage();
 				}

@@ -16,7 +16,7 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankApplication;
 
 public class BankServerThreadedTest {
 
-	private final int NMBR_OF_MOCKS = 2;
+	private final int NMBR_OF_MOCKS = 1000;
 	private final float AMOUNT = NMBR_OF_MOCKS;
 	private final float DELTA = 0.00001f;
 	
@@ -35,7 +35,8 @@ public class BankServerThreadedTest {
 		client.setActiveAccount(account);
 		client.deposit(AMOUNT);
 
-		Thread server = new Thread(new BankServerThreaded(bank, 2004));
+		BankServerThreaded bst = new BankServerThreaded(bank, 2004);
+		Thread server = new Thread(bst);
 		server.start();
 		
 		
@@ -50,7 +51,7 @@ public class BankServerThreadedTest {
 			mocks.get(i).join();
 		}
 		
-		server.join();
+//		server.join();
 		
 		assertEquals(initialBalance - AMOUNT, client.getBalance() - AMOUNT, DELTA);
 			
