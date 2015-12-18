@@ -38,7 +38,7 @@ public class BankClient {
 					message = (String) in.readObject();
 					System.out.println("server>> " + message);
 					
-					sendCommand(action());
+					sendRequest(action());
 					
 				} catch(ClassNotFoundException e) {
 					e.printStackTrace();
@@ -60,12 +60,11 @@ public class BankClient {
 		}
 	}
 
-	private void sendCommand(Request command) {
+	private void sendRequest(Request request) {
 		try {
-			out.writeObject(command);
+			out.writeObject(request);
 			out.flush();
-//			System.out.print("client>> ");
-			command.printInfo();
+			request.printInfo();
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
