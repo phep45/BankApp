@@ -20,14 +20,14 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.WithdrawRequest;
 
 public class BankServer {
 
-	private ServerSocket providerSocket;
-	private Socket connection = null;
-	private ObjectOutputStream out;
-	private ObjectInputStream in;
-	private Request request;
+	protected ServerSocket providerSocket;
+	protected Socket connection = null;
+	protected ObjectOutputStream out;
+	protected ObjectInputStream in;
+	protected Request request;
 	
-	private Bank activeBank;//= BankCommander.bank;
-	private Client loggedClient;
+	protected Bank activeBank;//= BankCommander.bank;
+	protected Client loggedClient;
 	
 	public BankServer(Bank bank) {
 		activeBank = bank;
@@ -75,7 +75,7 @@ public class BankServer {
 		}
 	}
 	
-	private String handleRequest(Request request) {
+	protected String handleRequest(Request request) {
 		//Login request
 		if(request.getClass() == LoginRequest.class) {
 			System.out.println("++++++++");
@@ -126,7 +126,7 @@ public class BankServer {
 		return "Incorrect command";
 	}
 
-	private void sendMessage(final String msg) {
+	protected void sendMessage(final String msg) {
 		try {
 			out.writeObject(msg);
 			out.flush();

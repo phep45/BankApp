@@ -16,6 +16,7 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.BankException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.ClientExistsException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankClient;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServerThreaded;
 
 public class BankApplication {
 
@@ -139,6 +140,12 @@ public class BankApplication {
 		else if(args[0].equals("-client")) {
 			BankClient bankClient = new BankClient();
 			bankClient.run();
+		}
+		else if(args[0].equals("-threads")) {
+			bankApp.initialize();
+			bankApp.modify();
+			BankServerThreaded bst = new BankServerThreaded(bankApp.bank, 2004);
+			bst.run();
 		}
 	}
 
