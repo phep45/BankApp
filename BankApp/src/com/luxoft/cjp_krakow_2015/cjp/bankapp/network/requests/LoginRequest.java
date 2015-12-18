@@ -1,12 +1,12 @@
-package com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands;
+package com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests;
 
-public class LoginCmd implements NetCommand {
+public class LoginRequest implements Request {
 
 	private static final long serialVersionUID = -4763014847861430529L;
 
 	private String login;
 	
-	public LoginCmd(String login) {
+	public LoginRequest(String login) {
 		this.login = login;
 	}
 	
@@ -16,8 +16,7 @@ public class LoginCmd implements NetCommand {
 	
 	@Override
 	public void printInfo() {
-		// TODO Auto-generated method stub
-
+		System.out.println("Login");
 	}
 
 }

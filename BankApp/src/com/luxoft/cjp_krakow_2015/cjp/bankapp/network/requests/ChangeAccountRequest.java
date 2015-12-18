@@ -1,12 +1,12 @@
-package com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands;
+package com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests;
 
-public class ChangeAccountCmd implements NetCommand {
+public class ChangeAccountRequest implements Request {
 	
 	private static final long serialVersionUID = -2160066748701010012L;
 
 	private final int accountID;
 	
-	public ChangeAccountCmd(int accountID) {
+	public ChangeAccountRequest(int accountID) {
 		this.accountID = accountID;
 	}
 	
@@ -16,8 +16,7 @@ public class ChangeAccountCmd implements NetCommand {
 	
 	@Override
 	public void printInfo() {
-		// TODO Auto-generated method stub
-
+		System.out.println("Change account");
 	}
 
 }

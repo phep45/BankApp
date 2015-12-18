@@ -11,12 +11,12 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Account;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.BankException;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.ChangeAccountCmd;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.EndTransactionCmd;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.LoginCmd;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.MyAccountsCmd;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.NetCommand;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.WithdrawCmd;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.ChangeAccountRequest;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.EndTransactionRequest;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.LoginRequest;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.MyAccountRequest;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.Request;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.WithdrawRequest;
 
 public class BankServer {
 
@@ -25,7 +25,7 @@ public class BankServer {
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private String message = "";
-	private NetCommand command;
+	private Request command;
 	
 	private Bank activeBank;//= BankCommander.bank;
 	private Client loggedClient;
@@ -54,7 +54,7 @@ public class BankServer {
 			do {
 				try {
 					
-					command = (NetCommand) in.readObject();
+					command = (Request) in.readObject();
 					command.printInfo();
 					sendMessage(handleRequest(command));
 					
@@ -80,14 +80,14 @@ public class BankServer {
 		}
 	}
 	
-	private String handleRequest(NetCommand command) {
+	private String handleRequest(Request command) {
 		//Login command
-		if(command.getClass() == LoginCmd.class) {
+		if(command.getClass() == LoginRequest.class) {
 			System.out.println("++++++++");
-			System.out.println(activeBank.getClient(((LoginCmd) command).getLogin()));
+			System.out.println(activeBank.getClient(((LoginRequest) command).getLogin()));
 			System.out.println("++++++++");
-			if(activeBank.getClient(((LoginCmd) command).getLogin()) != null) {
-				loggedClient = activeBank.getClient(((LoginCmd) command).getLogin());
+			if(activeBank.getClient(((LoginRequest) command).getLogin()) != null) {
+				loggedClient = activeBank.getClient(((LoginRequest) command).getLogin());
 				return "Logged in";
 			}
 			else {
@@ -95,7 +95,7 @@ public class BankServer {
 			}
 		}
 		//My accounts command
-		else if(command.getClass() == MyAccountsCmd.class) {
+		else if(command.getClass() == MyAccountRequest.class) {
 			StringBuilder response = new StringBuilder();
 			List<Account> accounts = loggedClient.getAccountsList();
 			for(Account account : accounts) {
@@ -105,26 +105,26 @@ public class BankServer {
 			
 		}
 		//Withdrawn command
-		else if(command.getClass() == WithdrawCmd.class) {
+		else if(command.getClass() == WithdrawRequest.class) {
 			if(loggedClient.getActiveAccount() != null) {
 				try {
-					loggedClient.withdraw(((WithdrawCmd)command).getAmount());
+					loggedClient.withdraw(((WithdrawRequest)command).getAmount());
 				} catch (BankException e) {
 					return e.getMessage();
 				}
-				return "Withdrawn: " + ((WithdrawCmd)command).getAmount();
+				return "Withdrawn: " + ((WithdrawRequest)command).getAmount();
 			}
 			else 
 				return "No account set as active";
 		}
 		//Change account command
-		else if(command.getClass() == ChangeAccountCmd.class) {
-			Account activeAccount = loggedClient.searchAccount(((ChangeAccountCmd)command).getAccountID());
+		else if(command.getClass() == ChangeAccountRequest.class) {
+			Account activeAccount = loggedClient.searchAccount(((ChangeAccountRequest)command).getAccountID());
 			loggedClient.setActiveAccount(activeAccount);
 			return "Acitve account is: " + activeAccount;
 		}
 		//End transaction command
-		else if(command.getClass() == EndTransactionCmd.class) {
+		else if(command.getClass() == EndTransactionRequest.class) {
 			message = "bye";
 			return message;
 		}

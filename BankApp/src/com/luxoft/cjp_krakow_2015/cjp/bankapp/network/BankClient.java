@@ -8,12 +8,12 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.ChangeAccountCmd;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.EndTransactionCmd;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.LoginCmd;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.MyAccountsCmd;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.NetCommand;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands.WithdrawCmd;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.ChangeAccountRequest;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.EndTransactionRequest;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.LoginRequest;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.MyAccountRequest;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.Request;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.WithdrawRequest;
 
 public class BankClient {
 
@@ -60,7 +60,7 @@ public class BankClient {
 		}
 	}
 
-	private void sendCommand(NetCommand command) {
+	private void sendCommand(Request command) {
 		try {
 			out.writeObject(command);
 			out.flush();
@@ -71,13 +71,13 @@ public class BankClient {
 		}
 	}
 
-	private NetCommand action() throws IOException {
+	private Request action() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		if(user == null) {
 			System.out.println("Username: ");
 			try {
 				user = reader.readLine();
-				return new LoginCmd(user);
+				return new LoginRequest(user);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -89,22 +89,22 @@ public class BankClient {
 			System.out.println("4) End transaction");
 			String option = reader.readLine();
 			if(option.equals("1")) {
-				return new MyAccountsCmd();
+				return new MyAccountRequest();
 			}
 			else if(option.equals("2")) {
 				System.out.println("Select account by ID:");
 				String id = reader.readLine();
-				return new ChangeAccountCmd(Integer.parseInt(id));
+				return new ChangeAccountRequest(Integer.parseInt(id));
 			}
 			else if(option.equals("3")) {
 				System.out.println("Amount:");
 				float amount = (float) Double.parseDouble(reader.readLine());
-				return new WithdrawCmd(amount);
+				return new WithdrawRequest(amount);
 			}
 			else if(option.equals("4")) {
 				System.out.println("Transaction ended");
 				message = "bye";
-				return new EndTransactionCmd();
+				return new EndTransactionRequest();
 			}
 			else {
 				action();

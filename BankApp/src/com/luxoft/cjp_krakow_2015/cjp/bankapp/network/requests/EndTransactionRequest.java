@@ -1,6 +1,6 @@
-package com.luxoft.cjp_krakow_2015.cjp.bankapp.network.commands;
+package com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests;
 
-public class EndTransactionCmd implements NetCommand {
+public class EndTransactionRequest implements Request {
 
 	private static final long serialVersionUID = 8395604587268751321L;
 
