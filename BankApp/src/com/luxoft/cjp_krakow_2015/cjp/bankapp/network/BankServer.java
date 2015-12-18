@@ -25,7 +25,7 @@ public class BankServer {
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private String message = "";
-	private Request command;
+	private Request request;
 	
 	private Bank activeBank;//= BankCommander.bank;
 	private Client loggedClient;
@@ -54,9 +54,9 @@ public class BankServer {
 			do {
 				try {
 					
-					command = (Request) in.readObject();
-					command.printInfo();
-					sendMessage(handleRequest(command));
+					request = (Request) in.readObject();
+					request.printInfo();
+					sendMessage(handleRequest(request));
 					
 					if(message.equals("bye")) {
 						sendMessage("bye");
@@ -80,22 +80,22 @@ public class BankServer {
 		}
 	}
 	
-	private String handleRequest(Request command) {
-		//Login command
-		if(command.getClass() == LoginRequest.class) {
+	private String handleRequest(Request request) {
+		//Login request
+		if(request.getClass() == LoginRequest.class) {
 			System.out.println("++++++++");
-			System.out.println(activeBank.getClient(((LoginRequest) command).getLogin()));
+			System.out.println(activeBank.getClient(((LoginRequest) request).getLogin()));
 			System.out.println("++++++++");
-			if(activeBank.getClient(((LoginRequest) command).getLogin()) != null) {
-				loggedClient = activeBank.getClient(((LoginRequest) command).getLogin());
+			if(activeBank.getClient(((LoginRequest) request).getLogin()) != null) {
+				loggedClient = activeBank.getClient(((LoginRequest) request).getLogin());
 				return "Logged in";
 			}
 			else {
 				return "Username incorrect";
 			}
 		}
-		//My accounts command
-		else if(command.getClass() == MyAccountRequest.class) {
+		//My accounts request
+		else if(request.getClass() == MyAccountRequest.class) {
 			StringBuilder response = new StringBuilder();
 			List<Account> accounts = loggedClient.getAccountsList();
 			for(Account account : accounts) {
@@ -104,27 +104,27 @@ public class BankServer {
 			return response.toString();
 			
 		}
-		//Withdrawn command
-		else if(command.getClass() == WithdrawRequest.class) {
+		//Withdrawn request
+		else if(request.getClass() == WithdrawRequest.class) {
 			if(loggedClient.getActiveAccount() != null) {
 				try {
-					loggedClient.withdraw(((WithdrawRequest)command).getAmount());
+					loggedClient.withdraw(((WithdrawRequest)request).getAmount());
 				} catch (BankException e) {
 					return e.getMessage();
 				}
-				return "Withdrawn: " + ((WithdrawRequest)command).getAmount();
+				return "Withdrawn: " + ((WithdrawRequest)request).getAmount();
 			}
 			else 
 				return "No account set as active";
 		}
-		//Change account command
-		else if(command.getClass() == ChangeAccountRequest.class) {
-			Account activeAccount = loggedClient.searchAccount(((ChangeAccountRequest)command).getAccountID());
+		//Change account request
+		else if(request.getClass() == ChangeAccountRequest.class) {
+			Account activeAccount = loggedClient.searchAccount(((ChangeAccountRequest)request).getAccountID());
 			loggedClient.setActiveAccount(activeAccount);
 			return "Acitve account is: " + activeAccount;
 		}
-		//End transaction command
-		else if(command.getClass() == EndTransactionRequest.class) {
+		//End transaction request
+		else if(request.getClass() == EndTransactionRequest.class) {
 			message = "bye";
 			return message;
 		}
