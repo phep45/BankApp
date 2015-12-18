@@ -29,6 +29,10 @@ public class BankServer {
 	protected Bank activeBank;//= BankCommander.bank;
 	protected Client loggedClient;
 	
+	public BankServer() {
+		
+	}
+	
 	public BankServer(Bank bank) {
 		activeBank = bank;
 	}

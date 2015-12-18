@@ -14,7 +14,7 @@ public class ServerThread extends BankServer implements Runnable {
 	private final Socket clientSocket;
 	
 	public ServerThread(Socket clientSocket) {
-		super(new Bank());
+//		super(new Bank());
 		this.clientSocket = clientSocket;
 	}
 	
