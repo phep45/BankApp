@@ -17,12 +17,12 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.WithdrawRequest;
 
 public class BankClient {
 
-	private Socket requestSocket;
-	private ObjectOutputStream out;
-	private ObjectInputStream in;
-	private String message;
-	private static final String SERVER = "localhost";
-	private String user = null;
+	protected Socket requestSocket;
+	protected ObjectOutputStream out;
+	protected ObjectInputStream in;
+	protected String message;
+	protected static final String SERVER = "localhost";
+	protected String user = null;
 	
 	public void run() {
 		try {
@@ -60,7 +60,7 @@ public class BankClient {
 		}
 	}
 
-	private void sendRequest(Request request) {
+	protected void sendRequest(Request request) {
 		try {
 			out.writeObject(request);
 			out.flush();

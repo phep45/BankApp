@@ -46,6 +46,10 @@ public class BankApplication {
 			bankService.addAccount(client, new CheckingAccount(client.getInitialOverdraft()));
 		}
 	}
+	
+	public Bank getBank() {
+		return bank;
+	}
 
 	public void modify() {
 		Set<Client> clientsList = bank.getClients();
