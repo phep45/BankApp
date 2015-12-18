@@ -24,7 +24,6 @@ public class BankServer {
 	private Socket connection = null;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
-	private String message = "";
 	private Request request;
 	
 	private Bank activeBank;//= BankCommander.bank;
@@ -58,14 +57,10 @@ public class BankServer {
 					request.printInfo();
 					sendMessage(handleRequest(request));
 					
-					if(message.equals("bye")) {
-						sendMessage("bye");
-					}
-					
 				} catch (ClassNotFoundException e) {
 					System.err.println("Data recived in unknown format");
 				}
-			} while(!message.equals("bye"));
+			} while(!(request instanceof EndTransactionRequest));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -125,8 +120,7 @@ public class BankServer {
 		}
 		//End transaction request
 		else if(request.getClass() == EndTransactionRequest.class) {
-			message = "bye";
-			return message;
+			return "bye";
 		}
 		
 		return "Incorrect command";
