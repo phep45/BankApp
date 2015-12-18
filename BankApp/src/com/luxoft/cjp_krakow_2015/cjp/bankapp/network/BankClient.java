@@ -114,34 +114,12 @@ public class BankClient {
 		return null;
 	}
 
-	/*
-	private void sendMessage(String msg) {
-		try {
-			out.writeObject(msg);
-			out.flush();
-			System.out.println("client>> " + msg);
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
-	
 	public void setMessage(String message) {
 		this.message = message;
 	}
 	
 	public static void main(String[] args) {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Username: ");
-		try {
-			String msg = reader.readLine();
-
-			BankClient client = new BankClient();
-			client.setMessage(msg);
-			client.run();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		BankClient bankClient = new BankClient();
+		bankClient.run();
 	}
 }
