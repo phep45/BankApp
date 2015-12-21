@@ -41,4 +41,20 @@ public class BankReport {
 		}
 	}
 	
+	public static String getFullReport(Bank bank) {
+		int sum = 0;
+		for(Client client : bank.getClients()) {
+			for(Account account : client.getAccountsList()) {
+				sum += account.decimalValue();
+			}
+		}
+		
+		int accountsNum = 0;
+		for(Client client : bank.getClients()) {
+			accountsNum += client.getAccountsList().size();
+		}
+		
+		return "Amount of clients: " + bank.getClients().size() + ", Amount of accounts: " + accountsNum + ", total balance: " + sum;
+	}
+	
 }

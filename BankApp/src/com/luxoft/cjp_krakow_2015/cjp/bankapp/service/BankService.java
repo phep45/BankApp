@@ -11,4 +11,5 @@ public interface BankService {
     public void addAccount(Client client, Account account);
     public void setActiveAccount(Client client, Account account);
     public Client getClient(Bank bank, String clientName);
+    public Client createClient();
 }

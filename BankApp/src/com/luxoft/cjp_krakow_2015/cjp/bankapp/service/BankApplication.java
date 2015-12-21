@@ -15,6 +15,7 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.SavingAccount;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.BankException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.ClientExistsException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankClient;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankRemoteOffice;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServerThreaded;
 
@@ -135,15 +136,22 @@ public class BankApplication {
 			bankApp.printBankReport();
 		}
 		else if(args[0].equals("-server")) {
+			System.out.println("Bank server");
 			bankApp.initialize();
 			bankApp.modify();
 //			bankApp.printBankReport();
-			BankServer server = new BankServer(bankApp.bank);
+			BankServer server = new BankServer(bankApp.bank, 2004);
+			server.run();
+		}
+		else if(args[0].equals("-remote")) {
+			System.out.println("Bank remote office");
+			bankApp.initialize();
+			bankApp.modify();
+			BankRemoteOffice server = new BankRemoteOffice(bankApp.bank, 2005);
 			server.run();
 		}
 		else if(args[0].equals("-client")) {
-			BankClient bankClient = new BankClient();
-			bankClient.run();
+			BankClient.main(args);
 		}
 		else if(args[0].equals("-threads")) {
 			bankApp.initialize();

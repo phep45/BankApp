@@ -22,6 +22,8 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.WithdrawRequest;
 
 public class BankServer {
 
+	protected int serverPort;
+	
 	protected ServerSocket providerSocket;
 	protected Socket connection = null;
 	protected ObjectOutputStream out;
@@ -33,23 +35,25 @@ public class BankServer {
 	
 	private Lock lock = new ReentrantLock();
 	
-	public BankServer() {
-		
-	}
-	
 	public BankServer(Bank bank) {
 		activeBank = bank;
+	}
+			
+	
+	public BankServer(Bank bank, int port) {
+		activeBank = bank;
+		serverPort = port;
 	}
 	
 	public void run() {
 		
 		activeBank.printReport();
 		
-		System.out.println();
-		System.out.println();
-		System.out.println();
+		System.out.println("==============");
+		System.out.println("localhost:" + serverPort);
+		System.out.println("==============");
 		try {
-			providerSocket = new ServerSocket(2004, 10);
+			providerSocket = new ServerSocket(serverPort, 10);
 			System.out.println("Waiting for connection");
 			connection = providerSocket.accept();
 			System.out.println("Connection recived from " + connection.getInetAddress().getHostName());
@@ -57,7 +61,7 @@ public class BankServer {
 			out.flush();
 			in = new ObjectInputStream(connection.getInputStream());
 			sendMessage("Connection successful");
-			
+
 			do {
 				try {
 					

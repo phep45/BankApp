@@ -18,6 +18,10 @@ public class BankClientMock extends BankClient implements Runnable {
 	private final int accountID = 2;
 	private final String username = "Ala MaKota";
 	
+	public BankClientMock() {
+		super(2004);
+	}
+	
 	@Override
 	public void run() {
 		try {
