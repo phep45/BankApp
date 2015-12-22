@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankInfo;
 
 public class BankDAOImpl extends BaseDAOImpl implements BankDAO {
 
@@ -64,6 +65,11 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO {
 		} finally {
 			closeConnection();
 		}
+	}
+
+	@Override
+	public BankInfo getBankInfo(Bank bank) {
+		return new BankInfo(bank);
 	}
 
 }
