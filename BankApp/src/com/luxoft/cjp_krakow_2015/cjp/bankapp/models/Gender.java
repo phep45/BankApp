@@ -14,4 +14,13 @@ public enum Gender {
 	private Gender(String salutation) {
 		this.salutation = salutation;
 	}
+
+	public String toSqlString() {
+		if(salutation.equals("Mr."))
+			return "m";
+		else if(salutation.equals("Mrs."))
+			return "f";
+		else
+			return "";
+	}
 }

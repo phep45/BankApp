@@ -11,4 +11,6 @@ public interface Account extends Report{
 	public float decimalValue();
 	public int getID();
 	public void parseFeed(Map<String, String> feed);
+	public int getClientId();
+	public void setClientId(int clientId);
 }

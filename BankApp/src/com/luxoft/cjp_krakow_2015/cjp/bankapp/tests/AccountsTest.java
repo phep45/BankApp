@@ -12,6 +12,9 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.BankException;
 public class AccountsTest {
 
 	private final double DELTA = 0.001;
+	private float moneyToDeposit = 1000;
+	private float moneyToWithdraw = 450;
+	private float overdraft = 450;
 	
 	@Test
 	public void testSavingAccount() throws BankException {
@@ -28,22 +31,15 @@ public class AccountsTest {
 	
 	@Test(expected=BankException.class)
 	public void testSavingAccountWithdrawOverLimit() throws BankException {
-		float moneyToDeposit = 1000;
-		float moneyToWithdraw = 1450;
-		
 		Account account = new SavingAccount();
 		
 		account.deposit(moneyToDeposit);
-		account.withdraw(moneyToWithdraw);
+		account.withdraw(moneyToWithdraw * 3);
 		
-		assertEquals(moneyToDeposit, account.getBalance(), DELTA); //???
 	}
 	
 	@Test
 	public void testCheckingAccount() throws BankException {
-		float moneyToDeposit = 1000;
-		float moneyToWithdraw = 450;
-		
 		Account account = new CheckingAccount();
 		
 		account.deposit(moneyToDeposit);
@@ -54,10 +50,6 @@ public class AccountsTest {
 	
 	@Test
 	public void testCheckingAccountWithdrawBelowLimit() throws BankException {
-		float moneyToDeposit = 1000;
-		float moneyToWithdraw = 450;
-		float overdraft = 500;
-		
 		Account account = new CheckingAccount();
 		((CheckingAccount) account).setOverdraft(overdraft);
 		
@@ -69,17 +61,12 @@ public class AccountsTest {
 	
 	@Test(expected=BankException.class)
 	public void testCheckingAccountWithdrawOverLimit() throws BankException {
-		float moneyToDeposit = 1000;
-		float moneyToWithdraw = 2450;
-		float overdraft = 500;
-		
 		Account account = new CheckingAccount();
 		((CheckingAccount) account).setOverdraft(overdraft);
 		
 		account.deposit(moneyToDeposit);
-		account.withdraw(moneyToWithdraw);
+		account.withdraw(moneyToWithdraw * 10);
 		
-		assertEquals(moneyToDeposit, account.getBalance(), DELTA); //???
 	}
 	
 	@Test

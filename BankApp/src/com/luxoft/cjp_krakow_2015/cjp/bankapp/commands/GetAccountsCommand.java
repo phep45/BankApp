@@ -6,6 +6,7 @@ public class GetAccountsCommand implements Command {
 
 	@Override
 	public void execute() {
+		System.out.println("Bank report:");
 		BankCommander.bank.printReport();
 	}
 

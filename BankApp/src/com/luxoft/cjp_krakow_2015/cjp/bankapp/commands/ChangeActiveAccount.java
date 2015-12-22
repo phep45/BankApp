@@ -11,6 +11,10 @@ public class ChangeActiveAccount implements Command {
 
 	@Override
 	public void execute() throws IOException {
+		if(BankCommander.currentClient.getAccountsList().isEmpty()){
+			System.out.println("Client has no accounts");
+			return;
+		}
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		for(Account account : BankCommander.currentClient.getAccountsList()) {
 			account.printReport();

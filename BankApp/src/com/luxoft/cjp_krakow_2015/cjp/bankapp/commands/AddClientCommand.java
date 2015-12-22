@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAO;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAOImpl;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.DAOException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Gender;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.ClientExistsException;
@@ -60,7 +63,6 @@ public class AddClientCommand implements Command {
 		}
 		System.out.println("Overdraft: ");
 		float overdraft = (float) Double.parseDouble(reader.readLine());
-		
 		try {
 			if(gender.toLowerCase().equals("male") || gender.toLowerCase().equals("m"))
 				BankCommander.bank.addClient(new Client(name, Gender.MALE, email, city, overdraft));
@@ -68,11 +70,17 @@ public class AddClientCommand implements Command {
 				BankCommander.bank.addClient(new Client(name, Gender.FEMALE, email, city, overdraft));
 			else
 				System.err.println("Invalid gender");
+			
+			ClientDAO clientDAO = new ClientDAOImpl();
+			clientDAO.save(new Client(Client.getNextId(), name, gender, email, overdraft, BankCommander.bank.getId()));
+			
 		} catch(InvalidClientNameException e) {
 			System.err.println(e.getMessage());
 		} catch(EmailException e) {
 			System.err.println(e.getMessage());
 		}catch (ClientExistsException e) {
+			System.err.println(e.getMessage());
+		} catch (DAOException e) {
 			System.err.println(e.getMessage());
 		}
 

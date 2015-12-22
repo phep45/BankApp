@@ -10,9 +10,20 @@ public abstract class AbstractAccount implements Account, Serializable {
 	private static int idGenerator;
 	protected int id;
 	
+	protected int clientId;
+	
 	public AbstractAccount() {
 		balance = 0;
 		id = idGenerator++;
+	}
+	
+	/**
+	 * For databases purposes. DO NOT USE.
+	 * 
+	 * @param id
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public float getBalance() {
@@ -23,7 +34,7 @@ public abstract class AbstractAccount implements Account, Serializable {
 		balance += amount;
 	}
 	
-	public void withdraw(float amount) throws BankException {
+	public synchronized void withdraw(float amount) throws BankException {
 		balance -= amount;
 	}
 	
@@ -41,6 +52,14 @@ public abstract class AbstractAccount implements Account, Serializable {
 	
 	public int getID() {
 		return id;
+	}
+	
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
+	}
+	
+	public int getClientId() {
+		return clientId;
 	}
 	
 	@Override

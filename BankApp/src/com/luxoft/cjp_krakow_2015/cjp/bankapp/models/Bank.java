@@ -20,6 +20,9 @@ public class Bank implements Report, Serializable{
 	
 	private static final long serialVersionUID = -2449631634399254092L;
 	
+	private String name;
+	private int id;
+	
 	private Set<Client> clientsSet;
 	private List<ClientRegistrationListener> eventListeners;
 	private Map<String, Set<Client>> cities;
@@ -37,6 +40,15 @@ public class Bank implements Report, Serializable{
 		registerEvent(new DebugListener());
 	}
 	
+	public Bank(String name) {
+		this();
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
 	class PrintClientListener implements ClientRegistrationListener, Serializable {
 		private static final long serialVersionUID = -64836434897157030L;
 
@@ -162,6 +174,10 @@ public class Bank implements Report, Serializable{
 
 	@Override
 	public void printReport() {
+		if(clientsSet.isEmpty()) {
+			System.out.println("No clients in bank");
+			return;
+		}
 		for(Client client : clientsSet) {
 			System.out.println(client);
 			for(Account account : client.getAccountsList()) {
@@ -170,5 +186,13 @@ public class Bank implements Report, Serializable{
 			}
 			System.out.println();
 		}
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
 	}
 }

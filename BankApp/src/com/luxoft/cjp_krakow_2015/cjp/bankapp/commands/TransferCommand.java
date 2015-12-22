@@ -4,6 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.AccountDAO;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.AccountDAOImpl;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAO;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAOImpl;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.DAOException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Account;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.BankException;
@@ -34,9 +39,16 @@ public class TransferCommand implements Command {
 				return;
 			}
 			account.deposit(amount);
+			ClientDAO clientDAO = new ClientDAOImpl();
+			AccountDAO accountDAO = new AccountDAOImpl();
+			clientDAO.save(BankCommander.currentClient);
+			accountDAO.save(BankCommander.currentClient.getActiveAccount());
+			accountDAO.save(account);
 		} catch (BankException e) {
 			System.err.println(e.getMessage());
 		} catch (NumberFormatException e) {
+			System.err.println(e.getMessage());
+		} catch (DAOException e) {
 			System.err.println(e.getMessage());
 		}
 	}

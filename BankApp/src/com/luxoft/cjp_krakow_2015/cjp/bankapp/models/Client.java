@@ -20,15 +20,16 @@ public class Client implements Comparable<Client>, Serializable{
 	private Gender gender;
 	private Email email;
 	private String city;
-	private List<Account> accounts;
+	private List<Account> accounts = new ArrayList<Account>();
 	private Account activeAccount;
 	private float initialOverdraft;
+	private int bankId;
 	
 	private static int idGenerator;
 	private int id;
 	
 	private Client() {
-		accounts = new ArrayList<Account>();
+//		accounts = new ArrayList<Account>();
 		id = idGenerator++;
 	}
 	
@@ -63,6 +64,33 @@ public class Client implements Comparable<Client>, Serializable{
 	public Client(String name, Gender gender, String email, String city, float initialOverdraft) throws InvalidClientNameException, EmailException {
 		this(name, gender, email, city);
 		this.initialOverdraft = initialOverdraft;
+	}
+	
+	/**
+	 * 
+	 * Constructor for databases purposes.
+	 * 
+	 * @param id
+	 * @param name
+	 * @param gender
+	 * @param email
+	 * @param initialOverdraft
+	 * @param bankId
+	 * @throws EmailException
+	 */
+	public Client(int id, String name, String gender, String email, float initialOverdraft, int bankId) throws EmailException {
+		this.id = id;
+		this.name = name;
+		this.email = new Email(email);
+		this.initialOverdraft = initialOverdraft;
+		this.bankId = bankId;
+		this.city = "";
+		if(gender.toLowerCase().equals("m")) {
+			this.gender = Gender.MALE;
+		}
+		else if(gender.toLowerCase().equals("f")) {
+			this.gender = Gender.FEMALE;
+		}
 	}
 	
 	public void setActiveAccount(Account activeAccount) {
@@ -144,6 +172,10 @@ public class Client implements Comparable<Client>, Serializable{
 	
 	public String getCity() {
 		return city;
+	}
+	
+	public static int getNextId() {
+		return idGenerator++;
 	}
 
 	@Override
@@ -227,6 +259,18 @@ public class Client implements Comparable<Client>, Serializable{
 		accounts.add(account);
 		account.parseFeed(feed);
 		
+	}
+	
+	public void setBankId(int bankId) {
+		this.bankId = bankId;
+	}
+	
+	public int getBankId() {
+		return bankId;
+	}
+	
+	public Email getEmail() {
+		return email;
 	}
 
 

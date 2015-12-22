@@ -29,7 +29,7 @@ public class CheckingAccount extends AbstractAccount {
 	}
 	
 	@Override
-	public void withdraw(float amount) throws BankException {
+	public synchronized void withdraw(float amount) throws BankException {
 		if(balance - amount < -overdraft) {
 			throw new OverDraftLimitExceededException("OverDraftLimitExceeded", amount - balance - overdraft, this);
 		}

@@ -13,7 +13,7 @@ public class SavingAccount extends AbstractAccount {
 	private static final long serialVersionUID = 5967377366696302893L;
 
 	@Override
-	public void withdraw(float amount) throws BankException {
+	public synchronized void withdraw(float amount) throws BankException {
 		if(balance - amount < 0) {
 			throw new NotEnoughFundException("insufficient funds");
 		}

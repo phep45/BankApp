@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAO;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAOImpl;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.DAOException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.BankException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankCommander;
 
@@ -18,10 +21,14 @@ public class WithdrawCommand implements Command {
 			try {
 				double amount = Double.parseDouble(userInput);
 				BankCommander.currentClient.withdraw((float) amount);
+				ClientDAO clientDAO = new ClientDAOImpl();
+				clientDAO.save(BankCommander.currentClient);
 			} catch(NumberFormatException e) {
 				System.err.println("Invalid input");
 			} catch (BankException e) {
 				System.err.println("Limit exceeded");
+			} catch (DAOException e) {
+				System.err.println(e.getMessage());
 			} 
 	}
 
