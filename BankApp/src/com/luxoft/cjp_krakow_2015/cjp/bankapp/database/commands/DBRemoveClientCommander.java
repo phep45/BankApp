@@ -1,4 +1,4 @@
-package com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commander;
+package com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands;
 
 import java.io.BufferedReader;
 import java.io.IOException;

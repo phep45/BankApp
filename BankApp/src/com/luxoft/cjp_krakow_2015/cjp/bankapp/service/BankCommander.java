@@ -20,9 +20,9 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.SaveBankStateCommand;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.SaveClientCommand;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.TransferCommand;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.WithdrawCommand;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commander.DBRemoveClientCommander;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commander.DBSelectBankCommander;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commander.DBSelectClientCommander;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBRemoveClientCommander;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBSelectBankCommander;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBSelectClientCommander;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
 
