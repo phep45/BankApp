@@ -90,47 +90,20 @@ public class BankServer {
 	protected String handleRequest(Request request) {
 		//Login request
 		if(request.getClass() == LoginRequest.class) {
-			System.out.println("++++++++");
-			System.out.println(activeBank.getClient(((LoginRequest) request).getLogin()));
-			System.out.println("++++++++");
-			if(activeBank.getClient(((LoginRequest) request).getLogin()) != null) {
-				loggedClient = activeBank.getClient(((LoginRequest) request).getLogin());
-				return "Logged in";
-			}
-			else {
-				return "Username incorrect";
-			}
+			return handleLogin(request);
 		}
 		//My accounts request
 		else if(request.getClass() == MyAccountRequest.class) {
-			StringBuilder response = new StringBuilder();
-			List<Account> accounts = loggedClient.getAccountsList();
-			for(Account account : accounts) {
-				response.append(account.toString()).append("\n");
-			}
-			return response.toString();
+			return handleMyAccounts();
 			
 		}
 		//Withdrawn request
 		else if(request.getClass() == WithdrawRequest.class) {
-			if(loggedClient.getActiveAccount() != null) {
-				try {
-					lock.lock();
-					loggedClient.withdraw(((WithdrawRequest)request).getAmount());
-					lock.unlock();
-				} catch (BankException e) {
-					return e.getMessage();
-				}
-				return "Withdrawn: " + ((WithdrawRequest)request).getAmount();
-			}
-			else 
-				return "No account set as active";
+			return handleWithdraw(request);
 		}
 		//Change account request
 		else if(request.getClass() == ChangeAccountRequest.class) {
-			Account activeAccount = loggedClient.searchAccount(((ChangeAccountRequest)request).getAccountID());
-			loggedClient.setActiveAccount(activeAccount);
-			return "Acitve account is: " + activeAccount;
+			return handleChangeAccount(request);
 		}
 		//End transaction request
 		else if(request.getClass() == EndTransactionRequest.class) {
@@ -138,6 +111,53 @@ public class BankServer {
 		}
 		
 		return "Incorrect command";
+	}
+
+
+	private String handleChangeAccount(Request request) {
+		Account activeAccount = loggedClient.searchAccount(((ChangeAccountRequest)request).getAccountID());
+		loggedClient.setActiveAccount(activeAccount);
+		return "Acitve account is: " + activeAccount;
+	}
+
+
+	private String handleLogin(Request request) {
+		System.out.println("++++++++");
+		System.out.println(activeBank.getClient(((LoginRequest) request).getLogin()));
+		System.out.println("++++++++");
+		if(activeBank.getClient(((LoginRequest) request).getLogin()) != null) {
+			loggedClient = activeBank.getClient(((LoginRequest) request).getLogin());
+			return "Logged in";
+		}
+		else {
+			return "Username incorrect";
+		}
+	}
+
+
+	private String handleMyAccounts() {
+		StringBuilder response = new StringBuilder();
+		List<Account> accounts = loggedClient.getAccountsList();
+		for(Account account : accounts) {
+			response.append(account.toString()).append("\n");
+		}
+		return response.toString();
+	}
+
+
+	private String handleWithdraw(Request request) {
+		if(loggedClient.getActiveAccount() != null) {
+			try {
+				lock.lock();
+				loggedClient.withdraw(((WithdrawRequest)request).getAmount());
+				lock.unlock();
+			} catch (BankException e) {
+				return e.getMessage();
+			}
+			return "Withdrawn: " + ((WithdrawRequest)request).getAmount();
+		}
+		else 
+			return "No account set as active";
 	}
 
 	protected void sendMessage(final String msg) {

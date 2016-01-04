@@ -32,6 +32,8 @@ public class BankClient {
 	
 	protected BankServiceImpl bankService = new BankServiceImpl();
 	
+	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	
 	public BankClient(int port) {
 		this.port = port;
 	}
@@ -85,77 +87,87 @@ public class BankClient {
 	}
 
 	private Request action() throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		
 		if(user == null) {
-			System.out.println("Username: ");
-			try {
-				user = reader.readLine();
-				return new LoginRequest(user);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			return actionLogin();
 		}
 		
-		//superuser
 		else if(user.equals("superuser")) {
-			System.out.println("1) Add client");
-			System.out.println("2) Remove client");
-			System.out.println("3) Find client");
-			System.out.println("4) Get statistics");
-			System.out.println("5) End transaction");
-			String option = reader.readLine();
-			if(option.equals("1")) {
-				return new AddClientRequest(bankService.createClient());
-			}
-			else if(option.equals("2")) {
-				System.out.println("Client name: ");
-				String name = reader.readLine();
-				return new RemoveClientRequest(name);
-			}
-			else if(option.equals("3")) {
-				System.out.println("Client name: ");
-				String name = reader.readLine();
-				return new FindClientRequest(name);
-			}
-			else if(option.equals("4")) {
-				return new GetStatisticsRequest();
-			}
-			else if(option.equals("5")) {
-				return new EndTransactionRequest();
-			}
-			else {
-				action();
-			}
+			return actionSuperuser();
 		}
 		else {
-			System.out.println("1) My Accounts");
-			System.out.println("2) Change active accout");
-			System.out.println("3) Withdraw");
-			System.out.println("4) End transaction");
-			String option = reader.readLine();
-			if(option.equals("1")) {
-				return new MyAccountRequest();
-			}
-			else if(option.equals("2")) {
-				System.out.println("Select account by ID:");
-				String id = reader.readLine();
-				return new ChangeAccountRequest(Integer.parseInt(id));
-			}
-			else if(option.equals("3")) {
-				System.out.println("Amount:");
-				float amount = (float) Double.parseDouble(reader.readLine());
-				return new WithdrawRequest(amount);
-			}
-			else if(option.equals("4")) {
-				System.out.println("Transaction ended");
-				message = "bye";
-				return new EndTransactionRequest();
-			}
-			else {
-				action();
-			}
+			return actionUser();
 		}
-		
+	}
+
+	private Request actionUser() throws IOException {
+		System.out.println("1) My Accounts");
+		System.out.println("2) Change active accout");
+		System.out.println("3) Withdraw");
+		System.out.println("4) End transaction");
+		String option = reader.readLine();
+		if(option.equals("1")) {
+			return new MyAccountRequest();
+		}
+		else if(option.equals("2")) {
+			System.out.println("Select account by ID:");
+			String id = reader.readLine();
+			return new ChangeAccountRequest(Integer.parseInt(id));
+		}
+		else if(option.equals("3")) {
+			System.out.println("Amount:");
+			float amount = (float) Double.parseDouble(reader.readLine());
+			return new WithdrawRequest(amount);
+		}
+		else if(option.equals("4")) {
+			System.out.println("Transaction ended");
+			message = "bye";
+			return new EndTransactionRequest();
+		}
+		else {
+			return action();
+		}
+	}
+
+	private Request actionSuperuser() throws IOException {
+		System.out.println("1) Add client");
+		System.out.println("2) Remove client");
+		System.out.println("3) Find client");
+		System.out.println("4) Get statistics");
+		System.out.println("5) End transaction");
+		String option = reader.readLine();
+		if(option.equals("1")) {
+			return new AddClientRequest(bankService.createClient());
+		}
+		else if(option.equals("2")) {
+			System.out.println("Client name: ");
+			String name = reader.readLine();
+			return new RemoveClientRequest(name);
+		}
+		else if(option.equals("3")) {
+			System.out.println("Client name: ");
+			String name = reader.readLine();
+			return new FindClientRequest(name);
+		}
+		else if(option.equals("4")) {
+			return new GetStatisticsRequest();
+		}
+		else if(option.equals("5")) {
+			return new EndTransactionRequest();
+		}
+		else {
+			return actionSuperuser();
+		}
+	}
+
+	private Request actionLogin() {
+		System.out.println("Username: ");
+		try {
+			user = reader.readLine();
+			return new LoginRequest(user);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
