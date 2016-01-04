@@ -47,12 +47,4 @@ public class BankFeedService {
 		reader.close();
 	}
 	
-	public static void main(String[] args) throws IOException {
-		try {
-			loadFeed("data.feed");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 }
