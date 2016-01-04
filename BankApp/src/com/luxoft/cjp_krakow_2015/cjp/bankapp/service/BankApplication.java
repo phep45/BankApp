@@ -1,8 +1,10 @@
 package com.luxoft.cjp_krakow_2015.cjp.bankapp.service;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -131,9 +133,12 @@ public class BankApplication {
 			bankApp.initialize();
 			bankApp.printBankReport();
 			bankApp.modify();
-//			bankApp.printBalance();
 			System.out.println("===========================");
 			bankApp.printBankReport();
+			FileOutputStream fin = new FileOutputStream(".\\bank.ser");
+			ObjectOutputStream oos = new ObjectOutputStream(fin);
+			oos.writeObject(bankApp.bank);
+			oos.close();
 		}
 		else if(args[0].equals("-server")) {
 			System.out.println("Bank server");

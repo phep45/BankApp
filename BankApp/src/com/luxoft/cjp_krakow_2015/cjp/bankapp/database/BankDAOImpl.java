@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankInfo;
 
 public class BankDAOImpl extends BaseDAOImpl implements BankDAO {
@@ -42,6 +43,10 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO {
 		try {
 			openConnection();
 			stmt = conn.prepareStatement(sql);
+			for(Client c : bank.getClients()) {
+				ClientDAOImpl clDaoImpl = new ClientDAOImpl();
+				clDaoImpl.save(c);
+			}
 			if(!stmt.execute())
 				System.out.println("Bank saved");
 		} catch(SQLException e) {

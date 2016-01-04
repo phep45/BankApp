@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.NoDB;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.ClientExistsException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.EmailException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.InvalidClientNameException;
@@ -18,15 +19,15 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.listeners.ClientRegistratio
 
 public class Bank implements Report, Serializable{
 	
-	private static final long serialVersionUID = -2449631634399254092L;
+	@NoDB private static final long serialVersionUID = -2449631634399254092L;
 	
 	private String name;
-	private int id;
+	@NoDB private int id;
 	
 	private Set<Client> clientsSet;
-	private List<ClientRegistrationListener> eventListeners;
-	private Map<String, Set<Client>> cities;
-	private Map<String, Client> clientsMap;
+	@NoDB private List<ClientRegistrationListener> eventListeners;
+	@NoDB private Map<String, Set<Client>> cities;
+	@NoDB private Map<String, Client> clientsMap;
 	
 	public Bank() {
 		clientsSet = new TreeSet<Client>();
@@ -195,4 +196,50 @@ public class Bank implements Report, Serializable{
 	public int getId() {
 		return id;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((clientsSet == null) ? 0 : clientsSet.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bank other = (Bank) obj;
+		if (clientsSet == null) {
+			if (other.clientsSet != null)
+				return false;
+		} else if (!clientsSet.equals(other.clientsSet))
+			return false;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Bank [name=" + name + ", id=" + id + ", clientsSet=" + clientsSet + ", eventListeners=" + eventListeners
+				+ ", cities=" + cities + ", clientsMap=" + clientsMap + "]";
+	}
+	
+	
 }

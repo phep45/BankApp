@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.NoDB;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.BankException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.EmailException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.InvalidClientNameException;
@@ -20,10 +21,10 @@ public class Client implements Comparable<Client>, Serializable{
 	private Gender gender;
 	private Email email;
 	private String city;
-	private List<Account> accounts = new ArrayList<Account>();
+	@NoDB private List<Account> accounts = new ArrayList<Account>();
 	private Account activeAccount;
 	private float initialOverdraft;
-	private int bankId;
+	@NoDB private int bankId;
 	
 	private static int idGenerator;
 	private int id;
