@@ -22,7 +22,7 @@ public class ClientTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		client = new Client("name", Gender.FEMALE);
+		client = new Client("name surname", Gender.FEMALE);
 	}
 	
 	@Test
