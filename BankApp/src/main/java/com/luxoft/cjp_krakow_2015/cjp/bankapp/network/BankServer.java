@@ -151,6 +151,7 @@ public class BankServer {
 				lock.lock();
 				loggedClient.withdraw(((WithdrawRequest)request).getAmount());
 				lock.unlock();
+				Thread.yield();
 			} catch (BankException e) {
 				return e.getMessage();
 			}
