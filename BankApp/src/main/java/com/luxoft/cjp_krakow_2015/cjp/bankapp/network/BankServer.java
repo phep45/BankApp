@@ -8,6 +8,8 @@ import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Account;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
@@ -35,6 +37,8 @@ public class BankServer {
 	
 	private Lock lock = new ReentrantLock();
 	
+	static Logger log = Logger.getLogger(BankServer.class.getName());
+	
 	public BankServer(Bank bank) {
 		activeBank = bank;
 	}
@@ -57,6 +61,7 @@ public class BankServer {
 //			System.out.println("Waiting for connection");
 			connection = providerSocket.accept();
 //			System.out.println("Connection recived from " + connection.getInetAddress().getHostName());
+			log.log(Level.INFO, "Connection recived from " + connection.getInetAddress().getHostName());
 			out = new ObjectOutputStream(connection.getOutputStream());
 			out.flush();
 			in = new ObjectInputStream(connection.getInputStream());
@@ -81,6 +86,7 @@ public class BankServer {
 				in.close();
 				out.close();
 				providerSocket.close();
+				log.log(Level.INFO, "Connection closed");
 			} catch(IOException e) {
 				e.printStackTrace();
 			}
@@ -110,7 +116,7 @@ public class BankServer {
 			return "bye";
 		}
 		
-		return "Incorrect command";
+		return "Incorrect request";
 	}
 
 
