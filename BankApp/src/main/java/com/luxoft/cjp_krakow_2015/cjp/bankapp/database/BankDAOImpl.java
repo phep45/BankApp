@@ -13,6 +13,7 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO {
 
 	@Override
 	public Bank getBankByName(String name) throws DAOException, BankNotFoundException {
+		log.log(Level.INFO, "getting bank " + name);
 		Bank bank = new Bank(name);
 		String sql = "SELECT ID, NAME FROM BANK WHERE NAME=?";
 		PreparedStatement stmt;
@@ -40,6 +41,7 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO {
 
 	@Override
 	public void save(Bank bank) throws DAOException {
+		log.log(Level.INFO, "saving bank state " + bank.getName());
 		String sql ="INSERT INTO BANK (NAME) VALUES('" + bank.getName() +"');";
 		PreparedStatement stmt;
 		try {
@@ -61,6 +63,7 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO {
 
 	@Override
 	public void remove(Bank bank) throws DAOException {
+		log.log(Level.INFO, "removing bank " + bank.getName());
 		String sql = "DELETE FROM BANK WHERE NAME='" + bank.getName() + "');";
 		PreparedStatement stmt;
 		try {

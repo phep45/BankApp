@@ -15,6 +15,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
 	@Override
 	public void save(Account account) throws DAOException {
+		log.log(Level.INFO, "saving account: " + account);
 		String accountType = "";
 		float overdraft = 0f;
 		if(account instanceof CheckingAccount) {
@@ -49,6 +50,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
 	@Override
 	public void add(Account account) throws DAOException {
+		log.log(Level.INFO, "adding account " + account);
 		String accountType = "";
 		float overdraft = 0f;
 		if(account instanceof CheckingAccount) {
@@ -81,6 +83,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
 	@Override
 	public void removeByClientId(int clientId) throws DAOException {
+		log.log(Level.INFO, "removing by client id = " + clientId);
 		String sql = "DELETE FROM ACCOUNTS WHERE CLIENT_ID=" + clientId + ";";
 		PreparedStatement stmt;
 		try {
@@ -98,6 +101,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
 	@Override
 	public List<Account> getClientAccounts(int clientId) throws DAOException {
+		log.log(Level.INFO, "getting accounts list of client: " + clientId);
 		List<Account> clientAccountsList = new ArrayList<Account>();
 		String sql = "SELECT * FROM ACCOUNTS WHERE CLIENT_ID=" + clientId +";";
 		PreparedStatement stmt;

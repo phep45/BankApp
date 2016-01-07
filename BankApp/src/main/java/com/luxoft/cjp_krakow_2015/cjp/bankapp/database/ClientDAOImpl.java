@@ -15,6 +15,7 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
 
 	@Override
 	public Client findClientByName(Bank bank, String name) throws DAOException {
+		log.log(Level.INFO, "Looking for " + name + " in database");
 		String sql = "SELECT * FROM CLIENTS WHERE NAME='" + name + "';";
 		PreparedStatement stmt;
 		try {
@@ -45,6 +46,7 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
 
 	@Override
 	public List<Client> getAllClients(Bank bank) throws DAOException {
+		log.log(Level.INFO, "Getting all clients from bank: " + bank);
 		String sql = "SELECT * FROM CLIENTS WHERE BANK_ID=" + bank.getId() + ";";
 		PreparedStatement stmt;
 		List<Client> clientsList = new ArrayList<Client>();
@@ -77,6 +79,7 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
 
 	@Override
 	public void save(Client client) throws DAOException {
+		log.log(Level.INFO, "saving client " + client.getName());
 		String sql = "";
 		if(clientExistsInDB(client)){
 			sql = "UPDATE CLIENTS SET " +
@@ -111,6 +114,7 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
 
 	@Override
 	public void remove(Client client) throws DAOException {
+		log.log(Level.INFO, "removing client " + client.getName());
 		String sql = "DELETE FROM CLIENTS WHERE ID=" + client.getID() + ";";
 		PreparedStatement stmt;
 		try {
