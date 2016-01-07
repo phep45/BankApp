@@ -21,7 +21,7 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankApplication;
 
 public class BankServerThreadedTest {
 
-	private final int NMBR_OF_MOCKS = 1000;
+	private final int NMBR_OF_MOCKS = 10;
 	private final float AMOUNT = NMBR_OF_MOCKS;
 	private final float DELTA = 0.00001f;
 	

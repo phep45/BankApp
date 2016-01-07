@@ -74,7 +74,7 @@ public class BankClientMock extends BankClient implements Callable<Long>{
 		
 		try {
 			requestSocket = new Socket(SERVER, 2004);
-			System.out.println("Connected to localhost in port 2004");
+//			System.out.println("Connected to localhost in port 2004");
 			out = new ObjectOutputStream(requestSocket.getOutputStream());
 			out.flush();
 			in = new ObjectInputStream(requestSocket.getInputStream());
@@ -88,7 +88,7 @@ public class BankClientMock extends BankClient implements Callable<Long>{
 				sendRequest(new ChangeAccountRequest(accountID));
 				message = (String) in.readObject();
 				sendRequest(new WithdrawRequest(amountToWithdraw));
-				System.out.println(this + " completed");
+//				System.out.println(this + " completed");
 				sendRequest(new EndTransactionRequest());
 				message = (String) in.readObject();
 			} catch (ClassNotFoundException e1) {

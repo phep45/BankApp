@@ -50,7 +50,7 @@ public class BankClient {
 				
 				try {
 					message = (String) in.readObject();
-					System.out.println("server>> " + message);
+//					System.out.println("server>> " + message);
 					if(message.equals("Username incorrect")){
 						user = null;
 					}

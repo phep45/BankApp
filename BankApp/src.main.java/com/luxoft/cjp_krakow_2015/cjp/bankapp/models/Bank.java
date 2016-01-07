@@ -24,7 +24,7 @@ public class Bank implements Report, Serializable{
 	private String name;
 	@NoDB private int id;
 	
-	private Set<Client> clientsSet;
+	@NoDB private Set<Client> clientsSet;
 	@NoDB private List<ClientRegistrationListener> eventListeners;
 	@NoDB private Map<String, Set<Client>> cities;
 	@NoDB private Map<String, Client> clientsMap;

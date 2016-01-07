@@ -3,6 +3,7 @@ package com.luxoft.cjp_krakow_2015.cjp.bankapp.database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
@@ -29,6 +30,7 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO {
 				throw new BankNotFoundException("Bank " + name +" not found in database!");
 			}
 		} catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage(), e);
 			throw new DAOException(e.getMessage());
 		} finally {
 			closeConnection();
@@ -50,6 +52,7 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO {
 			if(!stmt.execute())
 				System.out.println("Bank saved");
 		} catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage(), e);
 			throw new DAOException(e.getMessage());
 		} finally {
 			closeConnection();

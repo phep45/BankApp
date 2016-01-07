@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
@@ -31,8 +32,10 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
 				return new Client(id, clientName, gender, email, initialOverdraft, bankId);
 			}
 		} catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage(), e);
 			throw new DAOException(e.getMessage());
 		} catch (EmailException e) {
+			log.log(Level.SEVERE, e.getMessage(), e);
 			System.err.println(e.getMessage());
 		} finally {
 			closeConnection();
@@ -61,8 +64,10 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
 				clientsList.add(client);
 			}
 		} catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage(), e);
 			throw new DAOException(e.getMessage());
 		} catch (EmailException e) {
+			log.log(Level.SEVERE, e.getMessage(), e);
 			System.err.println(e.getMessage());
 		} finally {
 			closeConnection();
@@ -96,6 +101,7 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
 			if(!stmt.execute())
 				System.out.println("Client saved");
 		} catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage(), e);
 			throw new DAOException(e.getMessage());
 		} finally {
 			closeConnection();
@@ -113,6 +119,7 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
 			if(!stmt.execute())
 				System.out.println("Client removed");
 		} catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage(), e);
 			throw new DAOException(e.getMessage());
 		} finally {
 			closeConnection();
@@ -130,6 +137,7 @@ public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
 				return true;
 			}
 		} catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage(), e);
 			throw new DAOException(e.getMessage());
 		} finally {
 			closeConnection();

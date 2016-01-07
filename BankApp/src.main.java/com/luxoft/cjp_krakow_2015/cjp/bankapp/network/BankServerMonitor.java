@@ -10,7 +10,7 @@ public class BankServerMonitor implements Runnable {
 			System.out.println("Number of connections: " + BankServerThreaded.getCounter());
 			try {
 				
-				Thread.sleep(10000);
+				Thread.sleep(10);
 				
 			} catch (InterruptedException e) {
 				e.printStackTrace();

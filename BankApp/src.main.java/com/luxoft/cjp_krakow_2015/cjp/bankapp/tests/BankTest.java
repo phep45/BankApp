@@ -22,7 +22,7 @@ public class BankTest {
 	
 	@Test
 	public void testAddOneCliet() throws InvalidClientNameException, ClientExistsException {
-		bank.addClient(new Client("name", Gender.FEMALE));
+		bank.addClient(new Client("name surname", Gender.FEMALE));
 		assertEquals(1, bank.getClients().size());
 	}
 	
@@ -30,7 +30,7 @@ public class BankTest {
 	public void testAddLotOfCLients() throws InvalidClientNameException, ClientExistsException {
 		int numberOfClients = 10000;
 		for(int i = 0; i < numberOfClients; i++) {
-			bank.addClient(new Client("name"+i, Gender.FEMALE));
+			bank.addClient(new Client("name surname"+i, Gender.FEMALE));
 		}
 		assertEquals(numberOfClients, bank.getClients().size());
 	}

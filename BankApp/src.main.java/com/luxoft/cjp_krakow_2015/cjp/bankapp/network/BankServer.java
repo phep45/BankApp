@@ -49,14 +49,14 @@ public class BankServer {
 		
 		activeBank.printReport();
 		
-		System.out.println("==============");
-		System.out.println("localhost:" + serverPort);
-		System.out.println("==============");
+//		System.out.println("==============");
+//		System.out.println("localhost:" + serverPort);
+//		System.out.println("==============");
 		try {
 			providerSocket = new ServerSocket(serverPort, 10);
-			System.out.println("Waiting for connection");
+//			System.out.println("Waiting for connection");
 			connection = providerSocket.accept();
-			System.out.println("Connection recived from " + connection.getInetAddress().getHostName());
+//			System.out.println("Connection recived from " + connection.getInetAddress().getHostName());
 			out = new ObjectOutputStream(connection.getOutputStream());
 			out.flush();
 			in = new ObjectInputStream(connection.getInputStream());
@@ -66,7 +66,7 @@ public class BankServer {
 				try {
 					
 					request = (Request) in.readObject();
-					request.printInfo();
+//					request.printInfo();
 					sendMessage(handleRequest(request));
 					
 				} catch (ClassNotFoundException e) {
@@ -122,9 +122,9 @@ public class BankServer {
 
 
 	private String handleLogin(Request request) {
-		System.out.println("++++++++");
-		System.out.println(activeBank.getClient(((LoginRequest) request).getLogin()));
-		System.out.println("++++++++");
+//		System.out.println("++++++++");
+//		System.out.println(activeBank.getClient(((LoginRequest) request).getLogin()));
+//		System.out.println("++++++++");
 		if(activeBank.getClient(((LoginRequest) request).getLogin()) != null) {
 			loggedClient = activeBank.getClient(((LoginRequest) request).getLogin());
 			return "Logged in";
@@ -164,7 +164,7 @@ public class BankServer {
 		try {
 			out.writeObject(msg);
 			out.flush();
-			System.out.println("server>> " + msg);
+//			System.out.println("server>> " + msg);
 		} catch(IOException e) {
 			e.printStackTrace();
 		}

@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Account;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.CheckingAccount;
@@ -39,6 +40,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 			else
 				System.err.println("Problems during save");
 		} catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage(), e);
 			throw new DAOException(e.getMessage());
 		} finally {
 			closeConnection();
@@ -70,6 +72,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 			if(stmt.execute())
 				System.out.println("Account saved");
 		} catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage(), e);
 			throw new DAOException(e.getMessage());
 		} finally {
 			closeConnection();
@@ -86,6 +89,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 			if(stmt.execute())
 				System.out.println("Accounts deleted");
 		} catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage(), e);
 			throw new DAOException(e.getMessage());
 		} finally {
 			closeConnection();
@@ -128,6 +132,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 				}
 			}
 		} catch(SQLException e) {
+			log.log(Level.SEVERE, e.getMessage(), e);
 			throw new DAOException(e.getMessage());
 		} finally {
 			closeConnection();

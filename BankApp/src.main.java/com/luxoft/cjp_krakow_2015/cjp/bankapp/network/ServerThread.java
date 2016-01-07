@@ -40,7 +40,7 @@ public class ServerThread extends BankServer implements Runnable {
 				try {
 					
 					request = (Request) in.readObject();
-					request.printInfo();
+//					request.printInfo();
 					sendMessage(handleRequest(request));
 					
 				} catch (ClassNotFoundException e) {

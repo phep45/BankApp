@@ -52,9 +52,6 @@ public class BankDAOTest {
 			bank2.addClient(client);
 		}
 		
-		System.out.println(bank);
-		System.out.println(bank2);
-		
 		assertTrue(TestService.isEquals(bank, bank2));
 	}
 	
