@@ -96,23 +96,28 @@ public class BankServer {
 	protected String handleRequest(Request request) {
 		//Login request
 		if(request.getClass() == LoginRequest.class) {
+			log.log(Level.INFO, "Log in request recieved");
 			return handleLogin(request);
 		}
 		//My accounts request
 		else if(request.getClass() == MyAccountRequest.class) {
+			log.log(Level.INFO, "My accounts request recieved");
 			return handleMyAccounts();
 			
 		}
 		//Withdrawn request
 		else if(request.getClass() == WithdrawRequest.class) {
+			log.log(Level.INFO, "withdraw request recieved");
 			return handleWithdraw(request);
 		}
 		//Change account request
 		else if(request.getClass() == ChangeAccountRequest.class) {
+			log.log(Level.INFO, "change account request recieved");
 			return handleChangeAccount(request);
 		}
 		//End transaction request
 		else if(request.getClass() == EndTransactionRequest.class) {
+			log.log(Level.INFO, "end transaction request recieved");
 			return "bye";
 		}
 		

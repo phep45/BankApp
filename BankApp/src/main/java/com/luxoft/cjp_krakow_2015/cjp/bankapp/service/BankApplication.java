@@ -7,6 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Account;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.CheckingAccount;
@@ -25,6 +28,11 @@ public class BankApplication {
 
 	private Bank bank;
 	private BankServiceImpl bankService;
+	
+	static Logger logger = Logger.getLogger(BankApplication.class.getName());
+//	static {
+//        logger.setLevel(Level.ALL);
+//	}
 	
 	public BankApplication() {
 		bank = new Bank();
@@ -119,6 +127,9 @@ public class BankApplication {
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		BankApplication bankApp = new BankApplication();
+		
+		LogManager.getLogManager().readConfiguration(new FileInputStream("./src/main/resources/logger_all.properties"));
+		
 		if(args.length == 0) {
 			BankCommander.main(args);
 		}
@@ -144,8 +155,9 @@ public class BankApplication {
 			System.out.println("Bank server");
 			bankApp.initialize();
 			bankApp.modify();
-//			bankApp.printBankReport();
+			bankApp.printBankReport();
 			BankServer server = new BankServer(bankApp.bank, 2004);
+			logger.log(Level.INFO, "Application started as server");
 			server.run();
 		}
 		else if(args[0].equals("-remote")) {
