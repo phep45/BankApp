@@ -50,7 +50,6 @@ public class BankServer {
 	}
 	
 	public void run() {
-		
 		activeBank.printReport();
 		
 //		System.out.println("==============");

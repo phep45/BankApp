@@ -26,6 +26,7 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServerThreaded;
 
 public class BankApplication {
 
+	private static final String LOGGING_PROPERTIES = "./src/main/resources/logger_all.properties";
 	private Bank bank;
 	private BankServiceImpl bankService;
 	
@@ -128,7 +129,7 @@ public class BankApplication {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		BankApplication bankApp = new BankApplication();
 		
-		LogManager.getLogManager().readConfiguration(new FileInputStream("./src/main/resources/logger_all.properties"));
+		LogManager.getLogManager().readConfiguration(new FileInputStream(LOGGING_PROPERTIES));
 		
 		if(args.length == 0) {
 			BankCommander.main(args);
