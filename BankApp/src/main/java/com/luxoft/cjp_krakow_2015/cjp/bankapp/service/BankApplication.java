@@ -47,9 +47,9 @@ public class BankApplication {
 			bankService.addClient(bank, new Client("Ala MaKota", Gender.FEMALE, "ala@kot.com", "Katowice", 500f));
 			bankService.addClient(bank, new Client("Ola Olinska", Gender.FEMALE, "ola@mail.pl", "Katowice", 200f));
 		}catch(ClientExistsException e) {
-			System.err.println(e.getMessage());
+			logger.log(Level.FINE, e.getMessage());
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			logger.log(Level.FINE, e.getMessage());
 		}
 		
 		Set<Client> clientsList = bank.getClients();
@@ -73,7 +73,7 @@ public class BankApplication {
 		try {
 			currentClient.withdraw(300);
 		} catch (BankException e) {
-			System.err.println(e.getMessage());
+			logger.log(Level.FINE, e.getMessage());
 		}
 		
 		curentAccount = currentClient.getAccountsList().get(1);
@@ -82,7 +82,7 @@ public class BankApplication {
 		try {
 			currentClient.withdraw(389);
 		} catch (BankException e) {
-			System.err.println(e.getMessage());
+			logger.log(Level.FINE, e.getMessage());
 		}
 		
 		currentClient = iterator.next();
@@ -92,7 +92,7 @@ public class BankApplication {
 		try {
 			currentClient.withdraw(900);
 		} catch (BankException e) {
-			System.err.println(e.getMessage());
+			logger.log(Level.FINE, e.getMessage());
 		}
 		
 		curentAccount = currentClient.getAccountsList().get(1);
@@ -102,7 +102,7 @@ public class BankApplication {
 		try {
 			currentClient.withdraw(20);
 		} catch (BankException e) {
-			System.out.println(e.getMessage());
+			logger.log(Level.FINE, e.getMessage());
 		} 
 	}
 	
@@ -132,9 +132,11 @@ public class BankApplication {
 		LogManager.getLogManager().readConfiguration(new FileInputStream(LOGGING_PROPERTIES));
 		
 		if(args.length == 0) {
+			logger.log(Level.INFO, "Application started in standard mode");
 			BankCommander.main(args);
 		}
 		else if(args[0].equals("-report")) {
+			logger.log(Level.INFO, "Application started in report mode");
 			FileInputStream fin = new FileInputStream(".\\bank.ser");
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			bankApp.bank = (Bank) ois.readObject();
@@ -142,6 +144,7 @@ public class BankApplication {
 			ois.close();
 		}
 		else if(args[0].equals("-demo")) {
+			logger.log(Level.INFO, "Application started in demonstration mode");
 			bankApp.initialize();
 			bankApp.printBankReport();
 			bankApp.modify();
@@ -166,16 +169,22 @@ public class BankApplication {
 			bankApp.initialize();
 			bankApp.modify();
 			BankRemoteOffice server = new BankRemoteOffice(bankApp.bank, 2005);
+			logger.log(Level.INFO, "Application started as remote office");
 			server.run();
 		}
 		else if(args[0].equals("-client")) {
+			logger.log(Level.INFO, "Application started as client");
 			BankClient.main(args);
 		}
 		else if(args[0].equals("-threads")) {
 			bankApp.initialize();
 			bankApp.modify();
 			BankServerThreaded bst = new BankServerThreaded(bankApp.bank, 2004);
+			logger.log(Level.INFO, "Application started as multithreaded server");
 			bst.run();
+		}
+		else {
+			logger.log(Level.INFO, "Unknown option");
 		}
 	}
 
