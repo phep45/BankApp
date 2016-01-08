@@ -7,13 +7,12 @@ import java.util.logging.Logger;
 public class ConfigLoggers {
 	
 	public ConfigLoggers() throws SecurityException, IOException {
-		System.out.println("############## config ################");
 		Logger logger = Logger.getLogger("exceptions");
-		logger.addHandler(new FileHandler("exceptions.log"));
+		logger.addHandler(new FileHandler("exceptions.xml"));
 		logger = Logger.getLogger("clients");
-		logger.addHandler(new FileHandler("clients.log"));
+		logger.addHandler(new FileHandler("clients.xml"));
 		logger = Logger.getLogger("db");
-		logger.addHandler(new FileHandler("db.log"));
+		logger.addHandler(new FileHandler("db.xml"));
 	}
 	
 }

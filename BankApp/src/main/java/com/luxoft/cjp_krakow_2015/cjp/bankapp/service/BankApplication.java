@@ -8,7 +8,6 @@ import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Account;
@@ -26,7 +25,6 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServerThreaded;
 
 public class BankApplication {
 
-//	private static final String LOGGING_PROPERTIES = "./src/main/resources/logger_all.properties";
 	private Bank bank;
 	private BankServiceImpl bankService;
 	
@@ -125,8 +123,6 @@ public class BankApplication {
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		BankApplication bankApp = new BankApplication();
-		Logger.getLogger("db." + bankApp.getClass().getName()).log(Level.ALL, "TEEEEEST");
-//		LogManager.getLogManager().readConfiguration(new FileInputStream(LOGGING_PROPERTIES));
 		
 		if(args.length == 0) {
 			bankApp.logger.log(Level.INFO, "Application started in standard mode");
