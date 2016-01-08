@@ -37,7 +37,7 @@ public class BankServer {
 	
 	private Lock lock = new ReentrantLock();
 	
-	static Logger log = Logger.getLogger(BankServer.class.getName());
+	Logger log = Logger.getLogger("clients." + this.getClass().getName());
 	
 	public BankServer(Bank bank) {
 		activeBank = bank;

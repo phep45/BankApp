@@ -26,12 +26,12 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServerThreaded;
 
 public class BankApplication {
 
-	private static final String LOGGING_PROPERTIES = "./src/main/resources/logger_all.properties";
+//	private static final String LOGGING_PROPERTIES = "./src/main/resources/logger_all.properties";
 	private Bank bank;
 	private BankServiceImpl bankService;
 	
-	public static Logger logger = Logger.getLogger(BankApplication.class.getName());
-	
+	public Logger logger = Logger.getLogger("exceptions." + this.getClass().getName());
+
 	public BankApplication() {
 		bank = new Bank();
 		bankService = new BankServiceImpl();
@@ -125,15 +125,15 @@ public class BankApplication {
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		BankApplication bankApp = new BankApplication();
-		
-		LogManager.getLogManager().readConfiguration(new FileInputStream(LOGGING_PROPERTIES));
+		Logger.getLogger("db." + bankApp.getClass().getName()).log(Level.ALL, "TEEEEEST");
+//		LogManager.getLogManager().readConfiguration(new FileInputStream(LOGGING_PROPERTIES));
 		
 		if(args.length == 0) {
-			logger.log(Level.INFO, "Application started in standard mode");
+			bankApp.logger.log(Level.INFO, "Application started in standard mode");
 			BankCommander.main(args);
 		}
 		else if(args[0].equals("-report")) {
-			logger.log(Level.INFO, "Application started in report mode");
+			bankApp.logger.log(Level.INFO, "Application started in report mode");
 			FileInputStream fin = new FileInputStream(".\\bank.ser");
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			bankApp.bank = (Bank) ois.readObject();
@@ -141,7 +141,7 @@ public class BankApplication {
 			ois.close();
 		}
 		else if(args[0].equals("-demo")) {
-			logger.log(Level.INFO, "Application started in demonstration mode");
+			bankApp.logger.log(Level.INFO, "Application started in demonstration mode");
 			bankApp.initialize();
 			bankApp.printBankReport();
 			bankApp.modify();
@@ -158,7 +158,7 @@ public class BankApplication {
 			bankApp.modify();
 			bankApp.printBankReport();
 			BankServer server = new BankServer(bankApp.bank, 2004);
-			logger.log(Level.INFO, "Application started as server");
+			bankApp.logger.log(Level.INFO, "Application started as server");
 			server.run();
 		}
 		else if(args[0].equals("-remote")) {
@@ -166,22 +166,22 @@ public class BankApplication {
 			bankApp.initialize();
 			bankApp.modify();
 			BankRemoteOffice server = new BankRemoteOffice(bankApp.bank, 2005);
-			logger.log(Level.INFO, "Application started as remote office");
+			bankApp.logger.log(Level.INFO, "Application started as remote office");
 			server.run();
 		}
 		else if(args[0].equals("-client")) {
-			logger.log(Level.INFO, "Application started as client");
+			bankApp.logger.log(Level.INFO, "Application started as client");
 			BankClient.main(args);
 		}
 		else if(args[0].equals("-threads")) {
 			bankApp.initialize();
 			bankApp.modify();
 			BankServerThreaded bst = new BankServerThreaded(bankApp.bank, 2004);
-			logger.log(Level.INFO, "Application started as multithreaded server");
+			bankApp.logger.log(Level.INFO, "Application started as multithreaded server");
 			bst.run();
 		}
 		else {
-			logger.log(Level.INFO, "Unknown option");
+			bankApp.logger.log(Level.INFO, "Unknown option");
 		}
 	}
 

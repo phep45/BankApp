@@ -10,7 +10,7 @@ public class BaseDAOImpl implements BaseDAO {
 
 	protected Connection conn;
 	
-	static Logger log = Logger.getLogger(BaseDAOImpl.class.getName());
+	Logger log = Logger.getLogger("db." + this.getClass().getName());
 	
 	@Override
 	public Connection openConnection() throws DAOException {
