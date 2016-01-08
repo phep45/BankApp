@@ -30,10 +30,7 @@ public class BankApplication {
 	private Bank bank;
 	private BankServiceImpl bankService;
 	
-	static Logger logger = Logger.getLogger(BankApplication.class.getName());
-//	static {
-//        logger.setLevel(Level.ALL);
-//	}
+	public static Logger logger = Logger.getLogger(BankApplication.class.getName());
 	
 	public BankApplication() {
 		bank = new Bank();
