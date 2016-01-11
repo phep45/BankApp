@@ -13,9 +13,13 @@ public class WelcomeServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ServletOutputStream out = response.getOutputStream();
-		out.println("Hello! I'm ATM");
+		out.println("<!DOCTYPE html>");
+		out.println("<html>");
+		out.println("<body>");
+		out.println("Hello! I'm ATM <br/>");
 		out.println("<a href='AtmInterface.html'>Login</a>");
-		
+		out.println("</body>");
+		out.println("</html>");
 	}
 	
 }
