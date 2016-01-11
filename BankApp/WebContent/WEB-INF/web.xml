@@ -35,4 +35,23 @@
 	</welcome-file-list>
 	
 	
+	<filter>
+		<filter-name>CheckLoggedFilter</filter-name>
+		<filter-class>com.luxoft.cjp_krakow_2015.cjp.bankapp.servlets.CheckLoggedFilter</filter-class>
+		<init-param>
+			<param-name>message</param-name>
+			<param-value>Welcome!</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>CheckLoggedFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>CheckLoggedFilter</filter-name>
+		<servlet-name>WelcomeServlet</servlet-name>
+	</filter-mapping>
+	
 </web-app>
