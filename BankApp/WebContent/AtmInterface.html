@@ -14,7 +14,7 @@
     <h1>ATM Interface</h1>
   </div>
   <div id="mid">
-    <form id="form" action="form" method="POST" target="_blank">
+    <form id="form" action="/AtmInterface" method="POST" target="_self">
       <table>
         <tr><td colspan=2 style="font-weight:bold;">BankApp Co. ATM terminal:</td></tr>
         <tr>
@@ -27,15 +27,12 @@
           <td id="nameError" class="error"></td>
         </tr><tr>
           <td>Password:</td>
-          <td><input type="text" name="email" id="pass"/></td>
+          <td><input type="text" name="pass" id="pass"/></td>
           <td id="passError" class="error"></td>
         </tr>
         <tr><td>
           <div id="submitBtn"> <input type="submit" onclick="return checkForm();" value="Submit"> </div>
         </td>
-
-          <td><div id="super"><button type="button" onclick="location.href='BankStats.html';">Next</button></div>
-          <div id="client"><button type="button" onclick="location.href='ATM.html';">Next</button></div></td>
         </tr>
       </table>
     </form>
