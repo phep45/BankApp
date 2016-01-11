@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BankApp - ATM Interface</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
+  <link rel="stylesheet" href="AtmInterfaceStyle.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <script type="text/javascript" src="validation.js"></script>
+</head>
+<body>
+
+  <div id="top">
+    <h1>ATM Interface</h1>
+  </div>
+  <div id="mid">
+    <form id="form" action="form" method="POST" target="_blank">
+      <table>
+        <tr><td colspan=2 style="font-weight:bold;">BankApp Co. ATM terminal:</td></tr>
+        <tr>
+          <td>Email:</td>
+          <td><input type="text" name="email" id="email"/></td>
+          <td id="emailError" class="error"></td>
+        </tr><tr>
+          <td>Name:</td>
+          <td><input type="text" name="name" id="name"/></td>
+          <td id="nameError" class="error"></td>
+        </tr><tr>
+          <td>Password:</td>
+          <td><input type="text" name="email" id="pass"/></td>
+          <td id="passError" class="error"></td>
+        </tr>
+        <tr><td>
+          <div id="submitBtn"> <input type="submit" onclick="return checkForm();" value="Submit"> </div>
+        </td>
+
+          <td><div id="super"><button type="button" onclick="location.href='BankStats.html';">Next</button></div>
+          <div id="client"><button type="button" onclick="location.href='ATM.html';">Next</button></div></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+
+  <div id="bottom">
+    <p id="btm"> BankApp Co. 2016-??? </p>
+  </div>
+
+<script>
+$("#client").hide();
+$("#super").hide();
+</script>
+
+</body>
+</html>

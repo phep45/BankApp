@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BankApp - ATM Interface</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
+  <link rel="stylesheet" href="AtmInterfaceStyle.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <script type="text/javascript" src="validation.js"></script>
+</head>
+<body>
+
+  <div id="top">
+    <h1>Add client</h1>
+  </div>
+  <div id="mid">
+    <form id="form" action="form" method="POST" target="_blank">
+      <table>
+        <tr><td colspan=2 style="font-weight:bold;">BankApp Co. ATM terminal:</td></tr>
+        <tr>
+          <td>Full name:</td>
+          <td><input type="text" name="name" id="name"/></td>
+        </tr>
+        <tr>
+          <td>City:</td>
+          <td><input type="text" name="city" id="city"/></td>
+        </tr>
+        <tr>
+          <td><input type="radio" name="sex" value="male" checked="checked"/>Male</td>
+          <td><input type="radio" name="sex" value="female"/>Female</td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td><input type="text" name="email" id="email"/></td>
+        </tr>
+        <tr>
+          <td>Saving account:</td>
+          <td><input type="checkbox" name="account" id="account"/>Open</td>
+        </tr>
+        <tr>
+          <td>Initial balance:</td>
+          <td><input type="text" name="balance" id="balance"/></td>
+        </tr>
+        <tr><td>
+          <div id="addBtn"> <input type="submit" onclick="return addClient();" value="Add client"> </div>
+        </td>
+      </tr>
+      </table>
+    </form>
+  </div>
+
+
+
+</body>
+</html>

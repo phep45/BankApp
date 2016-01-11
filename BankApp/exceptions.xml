@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="windows-1250" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-01-08T12:35:58</date>
+  <millis>1452252958443</millis>
+  <sequence>1</sequence>
+  <logger>exceptions.com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankApplication</logger>
+  <level>INFO</level>
+  <class>com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankApplication</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>Application started as server</message>
+</record>
+</log>

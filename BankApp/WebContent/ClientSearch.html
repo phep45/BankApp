@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BankApp - ATM Interface</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
+  <link rel="stylesheet" href="AtmInterfaceStyle.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <script type="text/javascript" src="validation.js"></script>
+</head>
+<body>
+
+  <div id="top">
+    <h1>Search client</h1>
+  </div>
+  <div id="mid">
+    <form id="form" action="form" method="POST" target="_blank">
+      <table>
+        <tr><td colspan=2 style="font-weight:bold;">BankApp Co. ATM terminal:</td></tr>
+        <tr>
+          <td>Name:</td>
+          <td><input type="text" name="name" id="name"/></td>
+          <td id="nameError" class="error"></td>
+        </tr>
+        <tr><td>
+          <div id="searchBtn"> <input type="submit" onclick="return searchClient();" value="Search"> </div>
+        </td>
+
+      </table>
+    </form>
+  </div>
+
+
+
+</body>
+</html>

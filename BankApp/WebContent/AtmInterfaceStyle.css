@@ -1,0 +1,40 @@
+#top {
+  margin: auto;
+  width: 20%;
+}
+
+#mid {
+    margin: auto;
+    width: 25%;
+}
+
+#bottom {
+  margin: auto;
+  width: 10%;
+  font-size: 8;
+}
+
+.error {
+        color:red;
+        font-style: italic;
+}
+
+#submitBtn {
+  align-self: center;
+}
+
+.tab {
+    background-color: #EAFFFF;
+    border: 2 solid black;
+    margin:1px;
+    padding:1px;
+}
+
+.tab td {
+    border: 2 solid green;
+    padding:10px;
+}
+
+h1 {
+  color: blue;
+}

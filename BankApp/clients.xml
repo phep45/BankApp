@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="windows-1250" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-01-08T12:36:07</date>
+  <millis>1452252967493</millis>
+  <sequence>2</sequence>
+  <logger>clients.com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</logger>
+  <level>INFO</level>
+  <class>com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</class>
+  <method>run</method>
+  <thread>1</thread>
+  <message>Connection recived from 127.0.0.1</message>
+</record>
+<record>
+  <date>2016-01-08T12:36:12</date>
+  <millis>1452252972378</millis>
+  <sequence>3</sequence>
+  <logger>clients.com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</logger>
+  <level>INFO</level>
+  <class>com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</class>
+  <method>handleRequest</method>
+  <thread>1</thread>
+  <message>Log in request recieved</message>
+</record>
+<record>
+  <date>2016-01-08T12:36:14</date>
+  <millis>1452252974325</millis>
+  <sequence>4</sequence>
+  <logger>clients.com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</logger>
+  <level>INFO</level>
+  <class>com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</class>
+  <method>handleRequest</method>
+  <thread>1</thread>
+  <message>My accounts request recieved</message>
+</record>
+<record>
+  <date>2016-01-08T12:36:16</date>
+  <millis>1452252976942</millis>
+  <sequence>5</sequence>
+  <logger>clients.com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</logger>
+  <level>INFO</level>
+  <class>com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</class>
+  <method>handleRequest</method>
+  <thread>1</thread>
+  <message>end transaction request recieved</message>
+</record>
+<record>
+  <date>2016-01-08T12:36:16</date>
+  <millis>1452252976946</millis>
+  <sequence>6</sequence>
+  <logger>clients.com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</logger>
+  <level>INFO</level>
+  <class>com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</class>
+  <method>run</method>
+  <thread>1</thread>
+  <message>Connection closed</message>
+</record>
+</log>
