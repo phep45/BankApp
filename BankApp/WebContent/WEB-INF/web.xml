@@ -16,6 +16,11 @@
 		<servlet-class>com.luxoft.cjp_krakow_2015.cjp.bankapp.servlets.LoginServlet</servlet-class>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>SessionsAmountServlet</servlet-name>
+		<servlet-class>com.luxoft.cjp_krakow_2015.cjp.bankapp.servlets.SessionsAmountServlet</servlet-class>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>WelcomeServlet</servlet-name>
 		<url-pattern>/welcome</url-pattern>
@@ -26,12 +31,21 @@
 		<url-pattern>/AtmInterface</url-pattern>
 	</servlet-mapping>
 	
+	<servlet-mapping>
+		<servlet-name>SessionsAmountServlet</servlet-name>
+		<url-pattern>/sessions</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>welcome</welcome-file>
 	</welcome-file-list>
 	
 	<welcome-file-list>
 		<welcome-file>AtmInterface</welcome-file>
+	</welcome-file-list>
+		
+	<welcome-file-list>
+		<welcome-file>sessions</welcome-file>
 	</welcome-file-list>
 	
 	<filter>
