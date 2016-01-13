@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2016-01-08T12:36:07</date>
-  <millis>1452252967493</millis>
-  <sequence>2</sequence>
+  <date>2016-01-13T10:22:57</date>
+  <millis>1452676977403</millis>
+  <sequence>1</sequence>
   <logger>clients.com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</logger>
   <level>INFO</level>
   <class>com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</class>
@@ -13,9 +13,9 @@
   <message>Connection recived from 127.0.0.1</message>
 </record>
 <record>
-  <date>2016-01-08T12:36:12</date>
-  <millis>1452252972378</millis>
-  <sequence>3</sequence>
+  <date>2016-01-13T10:23:02</date>
+  <millis>1452676982833</millis>
+  <sequence>2</sequence>
   <logger>clients.com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</logger>
   <level>INFO</level>
   <class>com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</class>
@@ -24,8 +24,19 @@
   <message>Log in request recieved</message>
 </record>
 <record>
-  <date>2016-01-08T12:36:14</date>
-  <millis>1452252974325</millis>
+  <date>2016-01-13T10:23:05</date>
+  <millis>1452676985393</millis>
+  <sequence>3</sequence>
+  <logger>clients.com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</logger>
+  <level>INFO</level>
+  <class>com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</class>
+  <method>handleRequest</method>
+  <thread>1</thread>
+  <message>My accounts request recieved</message>
+</record>
+<record>
+  <date>2016-01-13T10:23:21</date>
+  <millis>1452677001874</millis>
   <sequence>4</sequence>
   <logger>clients.com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</logger>
   <level>INFO</level>
@@ -35,8 +46,8 @@
   <message>My accounts request recieved</message>
 </record>
 <record>
-  <date>2016-01-08T12:36:16</date>
-  <millis>1452252976942</millis>
+  <date>2016-01-13T10:23:24</date>
+  <millis>1452677004371</millis>
   <sequence>5</sequence>
   <logger>clients.com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</logger>
   <level>INFO</level>
@@ -46,8 +57,8 @@
   <message>end transaction request recieved</message>
 </record>
 <record>
-  <date>2016-01-08T12:36:16</date>
-  <millis>1452252976946</millis>
+  <date>2016-01-13T10:23:24</date>
+  <millis>1452677004371</millis>
   <sequence>6</sequence>
   <logger>clients.com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankServer</logger>
   <level>INFO</level>
