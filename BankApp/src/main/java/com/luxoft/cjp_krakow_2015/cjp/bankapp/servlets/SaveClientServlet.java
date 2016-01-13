@@ -14,7 +14,6 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.BankNotFoundException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAO;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAOImpl;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.DAOException;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.EmailException;
 
