@@ -14,7 +14,7 @@
   		 	Name: <c:out value="${client.name}" />
 
 
-		<br>
+		<br/>
 	</c:forEach>
 
 	<div id="buttons">

@@ -64,8 +64,10 @@ public class FindClientsServlet extends HttpServlet {
 		request.setAttribute("clientsList", clients);
 		request.setAttribute("balance", client.getActiveAccount().getBalance());
 		request.setAttribute("client", client);
-		request.getRequestDispatcher("/client.jsp").forward(request, response);
-		response.sendRedirect("/client.jsp");
+		
+		//TODO: redirect to addclient.jsp | client.jsp
+		request.getRequestDispatcher("/addclient.jsp").forward(request, response);
+		response.sendRedirect("/addclient.jsp");
 	}
 
 }
