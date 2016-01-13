@@ -1,7 +1,5 @@
 package com.luxoft.cjp_krakow_2015.cjp.bankapp.tests;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;
