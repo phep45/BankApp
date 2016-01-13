@@ -36,6 +36,16 @@
 		<servlet-class>com.luxoft.cjp_krakow_2015.cjp.bankapp.servlets.LogOutServlet</servlet-class>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>FindClientsServlet</servlet-name>
+		<servlet-class>com.luxoft.cjp_krakow_2015.cjp.bankapp.servlets.FindClientsServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>BankStatsServlet</servlet-name>
+		<servlet-class>com.luxoft.cjp_krakow_2015.cjp.bankapp.servlets.BankStatsServlet</servlet-class>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>WelcomeServlet</servlet-name>
 		<url-pattern>/welcome</url-pattern>
@@ -66,6 +76,16 @@
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
 	
+	<servlet-mapping>
+		<servlet-name>FindClientsServlet</servlet-name>
+		<url-pattern>/SearchClient</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>BankStatsServlet</servlet-name>
+		<url-pattern>/BankStats</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>welcome</welcome-file>
 	</welcome-file-list>
@@ -88,6 +108,14 @@
 	
 	<welcome-file-list>
 		<welcome-file>logout</welcome-file>
+	</welcome-file-list>
+	
+	<welcome-file-list>
+		<welcome-file>SearchClient</welcome-file>
+	</welcome-file-list>
+	
+	<welcome-file-list>
+		<welcome-file>BankStats</welcome-file>
 	</welcome-file-list>
 	
 	<filter>
