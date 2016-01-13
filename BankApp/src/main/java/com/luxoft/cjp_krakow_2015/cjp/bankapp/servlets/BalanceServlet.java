@@ -52,6 +52,8 @@ public class BalanceServlet extends HttpServlet {
 		int id = client.getAccountsList().get(0).getID();
 		client.setActiveAccount(client.searchAccount(id));
 		
+		request.setAttribute("balance", client.getActiveAccount().getBalance());
+		
 		ServletOutputStream out = response.getOutputStream();
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
