@@ -2,6 +2,7 @@ package com.luxoft.cjp_krakow_2015.cjp.bankapp.servlets;
 
 import java.io.IOException;
 
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ public class BalanceServlet extends HttpServlet {
 	private static final long serialVersionUID = -7348140197293965154L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String name = (String) request.getSession().getAttribute("name");
 		
 		ClientDAO clientDAO = new ClientDAOImpl();
@@ -53,23 +54,24 @@ public class BalanceServlet extends HttpServlet {
 		client.setActiveAccount(client.searchAccount(id));
 		
 		request.setAttribute("balance", client.getActiveAccount().getBalance());
-		
-		ServletOutputStream out = response.getOutputStream();
-		out.println("<!DOCTYPE html>");
-		out.println("<html>");
-		out.println("<body>");
-		out.println(client.getName());
-		out.print("Balance: ");
-		out.println(client.getActiveAccount().getBalance() + "<br/>");
-		out.println("Accounts:<br/>");
-		for(Account account : client.getAccountsList()) {
-			out.println("\t" + account.toString());
-			out.println("<br/>");
-		}
-		out.println("====================<br/>");
-		out.println("<a href='ATM.html'> Continue </a>");
-		out.println("</body>");
-		out.println("</html>");
+		request.setAttribute("client", client);
+		request.getRequestDispatcher("/client.jsp").forward(request, response);
+//		ServletOutputStream out = response.getOutputStream();
+//		out.println("<!DOCTYPE html>");
+//		out.println("<html>");
+//		out.println("<body>");
+//		out.println(client.getName());
+//		out.print("Balance: ");
+//		out.println(client.getActiveAccount().getBalance() + "<br/>");
+//		out.println("Accounts:<br/>");
+//		for(Account account : client.getAccountsList()) {
+//			out.println("\t" + account.toString());
+//			out.println("<br/>");
+//		}
+//		out.println("====================<br/>");
+//		out.println("<a href='ATM.html'> Continue </a>");
+//		out.println("</body>");
+//		out.println("</html>");
 		
 	}
 
