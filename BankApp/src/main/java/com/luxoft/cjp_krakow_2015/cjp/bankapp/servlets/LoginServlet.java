@@ -15,7 +15,8 @@ public class LoginServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 5308814134579210996L;
 	
-	protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
+	// protected -> public
+	public void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
 		final String name = request.getParameter("name");
 		final String email = request.getParameter("email");
 		final String pass = request.getParameter("pass");
@@ -28,9 +29,11 @@ public class LoginServlet extends HttpServlet {
 		log.info("Client " + name + " logged into ATM");
 		if(isSuperuser(name, email, pass)) {
 			response.sendRedirect("/BankStats.html");
+			log.info("Client redirected to /BankStats.html");
 		}
 		else 
 			response.sendRedirect("/ATM.html");
+		log.info("Client redirected to /ATM.html");
 	}
 
 	private boolean isSuperuser(String name, String email, String pass) {
