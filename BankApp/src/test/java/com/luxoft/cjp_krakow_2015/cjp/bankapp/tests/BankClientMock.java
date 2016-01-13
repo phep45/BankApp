@@ -17,7 +17,7 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.requests.WithdrawRequest;
 public class BankClientMock extends BankClient implements Callable<Long>{
 	
 	private final float amountToWithdraw = 1f;
-	private final int accountID = 2;
+	public static int accountID = 9;
 	private final String username = "Ala MaKota";
 	
 	public BankClientMock() {

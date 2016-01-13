@@ -21,6 +21,21 @@
 		<servlet-class>com.luxoft.cjp_krakow_2015.cjp.bankapp.servlets.SessionsAmountServlet</servlet-class>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>BalanceServlet</servlet-name>
+		<servlet-class>com.luxoft.cjp_krakow_2015.cjp.bankapp.servlets.BalanceServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>WithdrawAndDepositServlet</servlet-name>
+		<servlet-class>com.luxoft.cjp_krakow_2015.cjp.bankapp.servlets.WithdrawAndDepositServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>LogOutServlet</servlet-name>
+		<servlet-class>com.luxoft.cjp_krakow_2015.cjp.bankapp.servlets.LogOutServlet</servlet-class>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>WelcomeServlet</servlet-name>
 		<url-pattern>/welcome</url-pattern>
@@ -32,8 +47,23 @@
 	</servlet-mapping>
 	
 	<servlet-mapping>
+		<servlet-name>BalanceServlet</servlet-name>
+		<url-pattern>/balance</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
 		<servlet-name>SessionsAmountServlet</servlet-name>
 		<url-pattern>/sessions</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>WithdrawAndDepositServlet</servlet-name>
+		<url-pattern>/ATM</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>LogOutServlet</servlet-name>
+		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>
@@ -46,6 +76,18 @@
 		
 	<welcome-file-list>
 		<welcome-file>sessions</welcome-file>
+	</welcome-file-list>
+	
+	<welcome-file-list>
+		<welcome-file>balance</welcome-file>
+	</welcome-file-list>
+	
+	<welcome-file-list>
+		<welcome-file>ATM</welcome-file>
+	</welcome-file-list>
+	
+	<welcome-file-list>
+		<welcome-file>logout</welcome-file>
 	</welcome-file-list>
 	
 	<filter>

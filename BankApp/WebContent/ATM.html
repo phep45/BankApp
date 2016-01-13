@@ -14,13 +14,12 @@
     <h1>ATM Terminal</h1>
   </div>
   <div id="mid">
-    <form id="form" action="form" method="POST" target="_blank">
+    <form id="form" action="/ATM" method="POST" target="_self">
       <table>
         <caption>BankApp Co. ATM terminal:</caption>
-        <tr><td colspan=2 style="font-weight:bold;">Active account: </td></tr>
         <tr>
-          <td>Balance:</td>
-          <td><div id="balance">$99999.99</div></td>
+        	<td>Active account:</td>
+        	<td><input type="number" name="account" id="account"/></td>
         </tr>
         <tr>
           <td>Amount:</td>
@@ -30,8 +29,15 @@
           <td><input type="radio" name="operation" value="deposit" checked="checked"/>Deposit</td>
           <td><input type="radio" name="operation" value="withdraw"/>Withdraw</td>
         </tr>
-        <tr><td>
+        <tr>
+        <td>
           <div id="confirmBtn"> <input type="submit" onclick="return handle();" value="Confirm"> </div>
+        </td>
+         <td>
+          <button type="button" onclick="location.href='/balance';">My Accounts</button>
+        </td>
+        <td>
+          <button type="button" onclick="location.href='/logout';">Log out</button>
         </td>
       </tr>
       </table>

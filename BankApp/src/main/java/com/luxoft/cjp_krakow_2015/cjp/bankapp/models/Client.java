@@ -26,7 +26,7 @@ public class Client implements Comparable<Client>, Serializable{
 	private float initialOverdraft;
 	@NoDB private int bankId;
 	
-	private static int idGenerator;
+	private static int idGenerator = 0;
 	private int id;
 	
 	private Client() {

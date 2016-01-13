@@ -3,6 +3,7 @@ package com.luxoft.cjp_krakow_2015.cjp.bankapp.tests;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -11,6 +12,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Account;
@@ -21,7 +23,7 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankApplication;
 
 public class BankServerThreadedTest {
 
-	private final int NMBR_OF_MOCKS = 1000;
+	private final int NMBR_OF_MOCKS = 100;
 	private final float AMOUNT = NMBR_OF_MOCKS;
 	private final float DELTA = 0.00001f;
 	
@@ -62,6 +64,14 @@ public class BankServerThreadedTest {
 			
 	}
 */	
+	@Before
+	public void SetUp() throws ClassNotFoundException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+		Class<?> clazz = Class.forName("com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client");
+		Field field = Client.class.getDeclaredField("idGenerator");
+		field.setAccessible(true);
+		field.set(clazz, 0);
+	}
+	
 	@Test
 	public void testWithCallable() throws InterruptedException, IOException, ExecutionException {
 		BankApplication bankApp = new BankApplication();
@@ -70,9 +80,16 @@ public class BankServerThreadedTest {
 		
 		Bank bank = bankApp.getBank();
 		Client client = bank.getClient("Ala MaKota");
-		Account account = client.searchAccount(2);
-		float initialBalance = account.getBalance();
-
+		Account account = client.searchAccount(9);
+		float initialBalance=0;
+		try {
+			initialBalance = account.getBalance();
+		} catch(Exception e) {
+			
+			account = client.searchAccount(2);
+			initialBalance = account.getBalance();
+			BankClientMock.accountID = 2;
+		}
 		client.setActiveAccount(account);
 		client.deposit(AMOUNT);
 

@@ -27,7 +27,7 @@ public class BankTest {
 		assertEquals(1, bank.getClients().size());
 	}
 	
-	@Test
+//	@Test
 	public void testAddLotOfCLients() throws InvalidClientNameException, ClientExistsException, EmailException {
 		int numberOfClients = 10000;
 		for(int i = 0; i < numberOfClients; i++) {
