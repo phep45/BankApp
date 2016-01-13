@@ -18,7 +18,7 @@
 		<h1>Add client</h1>
 	</div>
 	<div id="mid">
-		<form id="form" action="form" method="POST" target="_blank">
+		<form id="form" action="/addclient" method="POST" target="_self">
 			<table>
 				<tr>
 					<td colspan=2 style="font-weight: bold;">BankApp Co. ATM

@@ -46,6 +46,11 @@
 		<servlet-class>com.luxoft.cjp_krakow_2015.cjp.bankapp.servlets.BankStatsServlet</servlet-class>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>SaveClientServlet</servlet-name>
+		<servlet-class>com.luxoft.cjp_krakow_2015.cjp.bankapp.servlets.SaveClientServlet</servlet-class>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>WelcomeServlet</servlet-name>
 		<url-pattern>/welcome</url-pattern>
@@ -86,6 +91,11 @@
 		<url-pattern>/BankStats</url-pattern>
 	</servlet-mapping>
 	
+	<servlet-mapping>
+		<servlet-name>SaveClientServlet</servlet-name>
+		<url-pattern>/addclient</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>welcome</welcome-file>
 	</welcome-file-list>
@@ -116,6 +126,10 @@
 	
 	<welcome-file-list>
 		<welcome-file>BankStats</welcome-file>
+	</welcome-file-list>
+	
+	<welcome-file-list>
+		<welcome-file>addclient</welcome-file>
 	</welcome-file-list>
 	
 	<filter>

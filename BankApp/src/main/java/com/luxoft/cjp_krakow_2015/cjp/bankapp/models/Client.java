@@ -274,5 +274,8 @@ public class Client implements Comparable<Client>, Serializable{
 		return email;
 	}
 
-
+	public void setEmail(String email) throws EmailException {
+		this.email = new Email(email);
+	}
+	
 }
