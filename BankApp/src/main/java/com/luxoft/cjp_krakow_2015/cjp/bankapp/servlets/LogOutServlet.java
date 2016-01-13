@@ -12,7 +12,7 @@ public class LogOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 4740711555042389618L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.getSession().invalidate();
 		ServletOutputStream out = response.getOutputStream();
 		out.println("<!DOCTYPE html>");
