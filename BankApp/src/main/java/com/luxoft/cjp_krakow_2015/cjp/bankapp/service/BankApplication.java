@@ -10,6 +10,9 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Account;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.CheckingAccount;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
@@ -27,6 +30,9 @@ public class BankApplication {
 
 	private Bank bank;
 	private BankServiceImpl bankService;
+	
+	public static final ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+
 	
 	public Logger logger = Logger.getLogger("exceptions." + this.getClass().getName());
 
@@ -126,7 +132,9 @@ public class BankApplication {
 		
 		if(args.length == 0) {
 			bankApp.logger.log(Level.INFO, "Application started in standard mode");
-			BankCommander.main(args);
+			((BankCommander) context.getBean("BankCommander")).run();
+			//new BankCommander().run();
+			
 		}
 		else if(args[0].equals("-report")) {
 			bankApp.logger.log(Level.INFO, "Application started in report mode");

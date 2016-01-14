@@ -4,16 +4,28 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.Command;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAO;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAOImpl;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.DAOException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankApplication;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankCommander;
 
 public class DBRemoveClientCommander implements Command {
 
-	private ClientDAO clientDAO = new ClientDAOImpl();
+//	private ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+	
+	private ClientDAO clientDAO = null;// (ClientDAO) BankApplication.context.getBean("clientDAO");
+	
+	public DBRemoveClientCommander() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+		
+		clientDAO = (ClientDAO) context.getBean("clientDAO");
+	}
 	
 	@Override
 	public void execute() {

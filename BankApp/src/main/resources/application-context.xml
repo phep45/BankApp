@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Bank service -->
+	<bean id="bankService" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankServiceImpl" autowire="byType" />
+	
+	<!-- DAOs -->
+	<bean id="bankDAO" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.BankDAOImpl" />
+	<bean id="clientDAO" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAOImpl" />
+	<bean id="accountDAO" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.AccountDAOImpl" />
+
+	<bean id="BankCommander" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankCommander">
+		<property name="commandsMap">
+			<map>
+				<entry key="1">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.FindClientCommand" autowire="byType"/>  
+				</entry>
+				<entry key="2">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.GetAccountsCommand" autowire="byType"/>  
+				</entry>
+				<entry key="3">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.WithdrawCommand" autowire="byType"/>  
+				</entry>
+				<entry key="4">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.DepositCommand" autowire="byType"/>  
+				</entry>
+				<entry key="5">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.TransferCommand" autowire="byType"/>  
+				</entry>
+				<entry key="6">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.AddClientCommand" autowire="byType"/>  
+				</entry>
+				<entry key="7">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.CreateAccount" autowire="byType"/>  
+				</entry>
+				<entry key="8">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.ChangeActiveAccount" autowire="byType"/>  
+				</entry>
+				<entry key="9">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.LoadFromFileCommand" autowire="byType"/>  
+				</entry>
+				<entry key="10">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.SaveClientCommand" autowire="byType"/>  
+				</entry>
+				<entry key="11">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.LoadClient" autowire="byType"/>  
+				</entry>
+				<entry key="12">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.SaveBankStateCommand" autowire="byType"/>  
+				</entry>
+				<entry key="13">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.LoadBankStateCommand" autowire="byType"/>  
+				</entry>
+				<entry key="14">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBSelectBankCommander" autowire="byType"/>  
+				</entry>
+				<entry key="15">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBSelectClientCommander" autowire="byType"/>  
+				</entry>
+				<entry key="16">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBRemoveClientCommander" autowire="byType"/>  
+				</entry>
+				<entry key="17">
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.ExitCommand" autowire="byType"/>  
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+</beans>

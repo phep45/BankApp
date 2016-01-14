@@ -30,58 +30,11 @@ public class BankCommander {
 	public static Bank bank = new Bank();
 	public static Client currentClient;
 	
-	private static boolean isRunning = true;
-	static Map<Integer, Command> commandsMap;
+	public static boolean isRunning = true;
 	
-	static Command[] commands = {
-			new FindClientCommand(),
-			new GetAccountsCommand(),
-			new WithdrawCommand(),
-			new DepositCommand(),
-			new TransferCommand(),
-			new AddClientCommand(),
-			new CreateAccount(),
-			new ChangeActiveAccount(),
-			new LoadFromFileCommand(),
-			new SaveClientCommand(),
-			new LoadClient(),
-			new SaveBankStateCommand(),
-			new LoadBankStateCommand(),
-			new DBSelectBankCommander(),
-			new DBSelectClientCommander(),
-			new DBRemoveClientCommander(),
-			new Command() {
-				@Override
-				public void printCommandInfo() {
-					System.out.println("Exit");
-				}
-				
-				@Override
-				public void execute() {
-					isRunning = false;
-				}
-			}
-			
-	};
+	private Map<Integer, Command> commandsMap;
 	
-	static {
-		commandsMap = new TreeMap<Integer, Command>();
-		int idx = 0;
-		for(Command cmd : commands) {
-			commandsMap.put(idx, cmd);
-			idx++;
-		}
-	}
-	
-	public void registerCommand(Integer name, Command command) {
-		commandsMap.put(name, command);
-	}
-	
-	public void removeCommand(String name) {
-		commandsMap.remove(name);
-	}
-	
-	public static void main(String[] args) {
+	public void run() {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		do {
 			System.out.println("----------------------------");
@@ -111,10 +64,18 @@ public class BankCommander {
             	System.err.println(e.getMessage());
             } catch(NumberFormatException | ArrayIndexOutOfBoundsException | NullPointerException e) {
             	e.printStackTrace();
-            	System.err.println("Use numbers 0 - " + (commands.length - 1));
+            	System.err.println("Use numbers 1 - " + (commandsMap.size()));
             } 
             
 		} while(isRunning);
+	}
+
+	public Map<Integer, Command> getCommandsMap() {
+		return commandsMap;
+	}
+
+	public void setCommandsMap(Map<Integer, Command> commandsMap) {
+		this.commandsMap = commandsMap;
 	}
 	
 }
