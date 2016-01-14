@@ -17,14 +17,14 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankCommander;
 
 public class DBRemoveClientCommander implements Command {
 
-//	private ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+//	private static ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
 	
 	private ClientDAO clientDAO = null;// (ClientDAO) BankApplication.context.getBean("clientDAO");
 	
 	public DBRemoveClientCommander() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+//		ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
 		
-		clientDAO = (ClientDAO) context.getBean("clientDAO");
+//		clientDAO = (ClientDAO) context.getBean("clientDAO");
 	}
 	
 	@Override
