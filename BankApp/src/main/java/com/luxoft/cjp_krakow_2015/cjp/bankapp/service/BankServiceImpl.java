@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.AccountDAO;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.BankDAO;
+import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAO;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Account;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
@@ -16,6 +19,10 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.InvalidClientNam
 
 public class BankServiceImpl implements BankService {
 
+	private BankDAO bankDAO;
+	private ClientDAO clientDAO;
+	private AccountDAO accountDAO;
+	
 	@Override
 	public void addClient(Bank bank, Client client) throws ClientExistsException {
 		bank.addClient(client);
@@ -105,6 +112,30 @@ public class BankServiceImpl implements BankService {
 		}
 
 		return null;
+	}
+
+	public BankDAO getBankDAO() {
+		return bankDAO;
+	}
+
+	public void setBankDAO(BankDAO bankDAO) {
+		this.bankDAO = bankDAO;
+	}
+
+	public ClientDAO getClientDAO() {
+		return clientDAO;
+	}
+
+	public void setClientDAO(ClientDAO clientDAO) {
+		this.clientDAO = clientDAO;
+	}
+
+	public AccountDAO getAccountDAO() {
+		return accountDAO;
+	}
+
+	public void setAccountDAO(AccountDAO accountDAO) {
+		this.accountDAO = accountDAO;
 	}
 
 }

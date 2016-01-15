@@ -5,7 +5,11 @@
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 	<!-- Bank service -->
-	<bean id="bankService" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankServiceImpl" autowire="byType" />
+	<bean id="bankService" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankServiceImpl" autowire="byType">
+		<property name="bankDAO" ref="bankDAO" />
+		<property name="clientDAO" ref="clientDAO" />
+		<property name="accountDAO" ref="accountDAO" />
+	</bean>
 	
 	<!-- DAOs -->
 	<bean id="bankDAO" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.BankDAOImpl" />
