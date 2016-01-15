@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAO;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAOImpl;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.DAOException;
@@ -97,6 +99,7 @@ public class AddClientCommand implements Command {
 		return clientDAO;
 	}
 
+	@Autowired
 	public void setClientDAO(ClientDAO clientDAO) {
 		this.clientDAO = clientDAO;
 	}

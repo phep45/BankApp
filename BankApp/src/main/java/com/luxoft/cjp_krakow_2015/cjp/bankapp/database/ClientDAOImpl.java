@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
+import javax.annotation.Resource;
+
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.EmailException;
 
+@Resource
 public class ClientDAOImpl extends BaseDAOImpl implements ClientDAO {
 
 	@Override

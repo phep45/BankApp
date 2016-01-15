@@ -5,10 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
+import javax.annotation.Resource;
+
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankInfo;
 
+@Resource
 public class BankDAOImpl extends BaseDAOImpl implements BankDAO {
 
 	@Override

@@ -4,11 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.Command;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAO;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.DAOException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankCommander;
+
 
 public class DBRemoveClientCommander implements Command {
 
@@ -38,6 +42,7 @@ public class DBRemoveClientCommander implements Command {
 		return clientDAO;
 	}
 
+	@Autowired
 	public void setClientDAO(ClientDAO clientDAO) {
 		this.clientDAO = clientDAO;
 	}

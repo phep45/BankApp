@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
+import javax.annotation.Resource;
+
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Account;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.CheckingAccount;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.SavingAccount;
 
+@Resource
 public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
 	@Override

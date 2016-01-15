@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.AccountDAO;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.BankDAO;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAO;
@@ -17,6 +20,7 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.ClientExistsExce
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.EmailException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.InvalidClientNameException;
 
+@Service
 public class BankServiceImpl implements BankService {
 
 	private BankDAO bankDAO;
@@ -118,6 +122,7 @@ public class BankServiceImpl implements BankService {
 		return bankDAO;
 	}
 
+	@Autowired
 	public void setBankDAO(BankDAO bankDAO) {
 		this.bankDAO = bankDAO;
 	}
@@ -126,6 +131,7 @@ public class BankServiceImpl implements BankService {
 		return clientDAO;
 	}
 
+	@Autowired
 	public void setClientDAO(ClientDAO clientDAO) {
 		this.clientDAO = clientDAO;
 	}
@@ -133,7 +139,8 @@ public class BankServiceImpl implements BankService {
 	public AccountDAO getAccountDAO() {
 		return accountDAO;
 	}
-
+	
+	@Autowired
 	public void setAccountDAO(AccountDAO accountDAO) {
 		this.accountDAO = accountDAO;
 	}
