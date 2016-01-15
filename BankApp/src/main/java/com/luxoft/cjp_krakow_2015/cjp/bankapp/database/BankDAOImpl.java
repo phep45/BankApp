@@ -14,10 +14,14 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.network.BankInfo;
 @Resource
 public class BankDAOImpl extends BaseDAOImpl implements BankDAO {
 
+	private Bank bank;
+	
 	@Override
 	public Bank getBankByName(String name) throws DAOException, BankNotFoundException {
 		log.log(Level.INFO, "getting bank " + name);
-		Bank bank = new Bank(name);
+//		Bank bank = (Bank) BankApplication.context.getBean("bank");
+//		Bank bank = new Bank(name);
+		bank.setName(name);
 		String sql = "SELECT ID, NAME FROM BANK WHERE NAME=?";
 		PreparedStatement stmt;
 		try {
@@ -84,6 +88,14 @@ public class BankDAOImpl extends BaseDAOImpl implements BankDAO {
 	@Override
 	public BankInfo getBankInfo(Bank bank) {
 		return new BankInfo(bank);
+	}
+
+	public Bank getBank() {
+		return bank;
+	}
+
+	public void setBank(Bank bank) {
+		this.bank = bank;
 	}
 
 }

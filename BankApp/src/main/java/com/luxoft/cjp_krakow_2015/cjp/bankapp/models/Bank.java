@@ -11,13 +11,21 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
+//import org.springframework.context.event.EventListener;
+
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.NoDB;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.ClientExistsException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.EmailException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.exceptions.InvalidClientNameException;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.listeners.ClientRegistrationListener;
 
-public class Bank implements Report, Serializable{
+@Component
+public class Bank implements Report, Serializable, ApplicationContextAware {
 	
 	@NoDB private static final long serialVersionUID = -2449631634399254092L;
 	
@@ -28,6 +36,7 @@ public class Bank implements Report, Serializable{
 	@NoDB private List<ClientRegistrationListener> eventListeners;
 	@NoDB private Map<String, Set<Client>> cities;
 	@NoDB private Map<String, Client> clientsMap;
+	@NoDB private ApplicationContext context;
 	
 	public Bank() {
 		clientsSet = new TreeSet<Client>();
@@ -50,11 +59,20 @@ public class Bank implements Report, Serializable{
 		return name;
 	}
 
-	class PrintClientListener implements ClientRegistrationListener, Serializable {
+	class PrintClientListener implements ClientRegistrationListener, Serializable, ApplicationListener<ClientAddedEvent> {
 		private static final long serialVersionUID = -64836434897157030L;
-
+		
+		public PrintClientListener() {}
+		
 		@Override
 		public void onClientAdded(Client client) {
+//			System.out.println(client.toString());
+//			clientsMap.put(client.getName(), client);
+		}
+
+		@Override
+		public void onApplicationEvent(ClientAddedEvent event) {
+			Client client = (Client) event.getSource();
 			System.out.println(client.toString());
 			clientsMap.put(client.getName(), client);
 		}
@@ -115,7 +133,8 @@ public class Bank implements Report, Serializable{
 		for(ClientRegistrationListener li : eventListeners) {
 			li.onClientAdded(client);
 		}
-		
+		System.out.println(context);
+		this.context.publishEvent(new ClientAddedEvent(client));
 	}
 	
 	public void removeClient(Client client) {
@@ -239,6 +258,12 @@ public class Bank implements Report, Serializable{
 	public String toString() {
 		return "Bank [name=" + name + ", id=" + id + ", clientsSet=" + clientsSet + ", eventListeners=" + eventListeners
 				+ ", cities=" + cities + ", clientsMap=" + clientsMap + "]";
+	}
+
+
+	@Override
+	public void setApplicationContext(ApplicationContext context) throws BeansException {
+		this.context = context;
 	}
 	
 	

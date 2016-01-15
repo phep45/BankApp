@@ -20,9 +20,9 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankCommander;
 
 public class DBSelectBankCommander implements Command {
 
-	private BankDAO bankDAO;//(BankDAO) BankApplication.context.getBean("bankDAO");
-	private ClientDAO clientDAO;//(ClientDAO) BankApplication.context.getBean("clientDAO");
-	private AccountDAO accountDAO;//(AccountDAO) BankApplication.context.getBean("accountDAO");
+	private BankDAO bankDAO;
+	private ClientDAO clientDAO;
+	private AccountDAO accountDAO;
 	
 	@Override
 	public void execute() {
@@ -33,12 +33,15 @@ public class DBSelectBankCommander implements Command {
 		try {
 			String name = reader.readLine();
 			bank = bankDAO.getBankByName(name);
+			//TODO 
+//			bank.setApplicationContext(BankApplication.context);
 			for(Client client : clientDAO.getAllClients(bank)) {
 				for(Account account : accountDAO.getClientAccounts(client.getID())) {
 					client.addAccount(account);
 				}
 				bank.addClient(client);
 			}
+			
 			BankCommander.bank = bank;
 		} catch (IOException e) {
 			e.printStackTrace();

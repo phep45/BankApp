@@ -49,7 +49,6 @@ public class BankCommander {
             	e.printStackTrace();
             	System.err.println("Use numbers 1 - " + (commandsMap.size()));
             } 
-            
 		} while(isRunning);
 	}
 

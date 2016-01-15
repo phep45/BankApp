@@ -10,6 +10,10 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.luxoft.cjp_krakow_2015.cjp.bankapp" />
 	
+	<bean id="bank" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank" />
+<!--  	<bean id="printClientListener" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank$PrintClientListener" />
+	-->
+	
 	<!-- Bank service -->
 	<bean id="bankService" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankServiceImpl" autowire="byType">
 		<property name="bankDAO" ref="bankDAO" />
@@ -18,7 +22,9 @@
 	</bean>
 	
 	<!-- DAOs -->
-	<bean id="bankDAO" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.BankDAOImpl" />
+	<bean id="bankDAO" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.BankDAOImpl">
+		<property name="bank" ref="bank"/>
+	</bean>
 	<bean id="clientDAO" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.ClientDAOImpl" />
 	<bean id="accountDAO" class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.AccountDAOImpl" />
 
