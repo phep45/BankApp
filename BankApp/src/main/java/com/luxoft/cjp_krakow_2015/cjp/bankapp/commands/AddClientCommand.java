@@ -18,6 +18,8 @@ import com.luxoft.cjp_krakow_2015.cjp.bankapp.service.BankCommander;
 
 public class AddClientCommand implements Command {
 
+	private ClientDAO clientDAO;
+	
 	@Override
 	public void execute() throws IOException {
 
@@ -71,7 +73,7 @@ public class AddClientCommand implements Command {
 			else
 				System.err.println("Invalid gender");
 			
-			ClientDAO clientDAO = new ClientDAOImpl();
+			clientDAO = new ClientDAOImpl();
 			clientDAO.save(new Client(Client.getNextId(), name, gender, email, overdraft, BankCommander.bank.getId()));
 			
 		} catch(InvalidClientNameException e) {
@@ -89,6 +91,14 @@ public class AddClientCommand implements Command {
 	@Override
 	public void printCommandInfo() {
 		System.out.println("Add client");
+	}
+
+	public ClientDAO getClientDAO() {
+		return clientDAO;
+	}
+
+	public void setClientDAO(ClientDAO clientDAO) {
+		this.clientDAO = clientDAO;
 	}
 
 }

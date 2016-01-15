@@ -16,7 +16,8 @@
 		<property name="commandsMap">
 			<map>
 				<entry key="1">
-					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.FindClientCommand" autowire="byType"/>  
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.FindClientCommand" autowire="byType">
+					</bean>  
 				</entry>
 				<entry key="2">
 					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.GetAccountsCommand" autowire="byType"/>  
@@ -31,7 +32,9 @@
 					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.TransferCommand" autowire="byType"/>  
 				</entry>
 				<entry key="6">
-					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.AddClientCommand" autowire="byType"/>  
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.AddClientCommand" autowire="byType">
+						<property name="clientDAO" ref="clientDAO" />
+					</bean>  
 				</entry>
 				<entry key="7">
 					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.CreateAccount" autowire="byType"/>  
@@ -55,13 +58,22 @@
 					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.LoadBankStateCommand" autowire="byType"/>  
 				</entry>
 				<entry key="14">
-					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBSelectBankCommander" autowire="byType"/>  
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBSelectBankCommander" autowire="byType">
+						<property name="bankDAO" ref="bankDAO" />
+						<property name="clientDAO" ref="clientDAO" />
+						<property name="accountDAO" ref="accountDAO"></property>
+					</bean>  
 				</entry>
 				<entry key="15">
-					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBSelectClientCommander" autowire="byType"/>  
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBSelectClientCommander" autowire="byType">
+						<property name="clientDAO" ref="clientDAO" />
+						<property name="accountDAO" ref="accountDAO" />
+					</bean>  
 				</entry>
 				<entry key="16">
-					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBRemoveClientCommander" autowire="byType"/>  
+					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBRemoveClientCommander" autowire="byType">
+						<property name="clientDAO" ref="clientDAO" />
+					</bean>  
 				</entry>
 				<entry key="17">
 					<bean class="com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.ExitCommand" autowire="byType"/>  

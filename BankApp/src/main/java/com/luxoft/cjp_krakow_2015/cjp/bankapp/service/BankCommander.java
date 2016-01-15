@@ -4,25 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
-import java.util.TreeMap;
 
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.AddClientCommand;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.ChangeActiveAccount;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.Command;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.CreateAccount;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.DepositCommand;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.FindClientCommand;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.GetAccountsCommand;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.LoadBankStateCommand;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.LoadClient;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.LoadFromFileCommand;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.SaveBankStateCommand;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.SaveClientCommand;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.TransferCommand;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.commands.WithdrawCommand;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBRemoveClientCommander;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBSelectBankCommander;
-import com.luxoft.cjp_krakow_2015.cjp.bankapp.database.commands.DBSelectClientCommander;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Bank;
 import com.luxoft.cjp_krakow_2015.cjp.bankapp.models.Client;
 
